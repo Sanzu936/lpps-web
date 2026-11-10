@@ -25,3 +25,6 @@ lighthouse-reports/
 .DS_Store
 *.log
 .vercel
+
+# Copias de trabajo temporales de agentes
+.claude/worktrees/
