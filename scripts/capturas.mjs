@@ -55,8 +55,9 @@ async function open(viewport, mobile) {
 }
 
 let page = await open({ width: 1440, height: 900 }, false);
+// Encuadre denso: desde los nombres de los socios (nombre elástico, firma, rol y tareas)
 const toNosotros = () =>
-  page.evaluate(() => window.scrollTo(0, document.getElementById("nosotros").getBoundingClientRect().top + scrollY - 40));
+  page.evaluate(() => window.scrollTo(0, document.querySelector("#nosotros .partners").getBoundingClientRect().top + scrollY - 48));
 res.escritorio = await shot(page, "lpps-escritorio", 1000);
 // antes / después: la sección "Quiénes somos" terminada y en fase de plano, con el mismo
 // encuadre en las dos (sin cabecera, sin hero ni cintas que se cuelen por arriba)

@@ -6,4 +6,6 @@ export const heroState = {
   visible: true,
   /** centro objetivo de la lente de cristal, en coordenadas de pantalla 0-1 (y hacia arriba) */
   lens: { x: 0.68, y: 0.55 },
+  /** false cuando la lente debe retirarse (en móvil, sin toque reciente, para no tapar el texto) */
+  lensOn: true,
 };

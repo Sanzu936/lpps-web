@@ -773,6 +773,7 @@
 
 /* Paso 4 */
 .vis-launch {
+  clip-path: inset(0 round var(--radius-l)); /* las baldosas en 3D no se salen del borde redondeado */
   background: var(--ink);
   color: var(--paper);
   display: grid;

@@ -169,7 +169,8 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       pointer.current.active = 1;
       pointer.current.last = performance.now();
       if (demand) {
-        activeUntil.current = performance.now() + 1500;
+        // en móvil se sigue dibujando hasta después de que la lente se retire (ver lensOn)
+        activeUntil.current = performance.now() + (mobile ? 3400 : 1500);
         invalidate();
       }
     };
@@ -187,7 +188,7 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       window.removeEventListener("scroll", onScroll);
       void el;
     };
-  }, [gl, demand, invalidate]);
+  }, [gl, demand, mobile, invalidate]);
 
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const plane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), []);
@@ -221,6 +222,8 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
     } else {
       target = pointer.current.ndc;
     }
+    // En móvil el texto ocupa casi toda la pantalla: la lente solo aparece mientras tocas.
+    heroState.lensOn = !(mobile && idle);
     ray.setFromCamera(target, camera);
     heroState.lens.x = target.x * 0.5 + 0.5;
     heroState.lens.y = target.y * 0.5 + 0.5;

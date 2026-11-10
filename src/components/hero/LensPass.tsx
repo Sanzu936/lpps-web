@@ -141,8 +141,9 @@ export default function LensPass({ radius = 120 }: { radius?: number }) {
     // aparece tras la entrada y se desvanece con la transición a la siguiente sección
     // (el póster estático del hero se genera sin lente: scripts/poster.mjs activa __lppsPoster)
     const noLens = (window as Window & { __lppsPoster?: boolean }).__lppsPoster === true;
-    const target = noLens ? 0 : Math.max(0, 1 - heroState.progress * 2.2);
+    const target = noLens || !heroState.lensOn ? 0 : Math.max(0, 1 - heroState.progress * 2.2);
     u.uAmt.value += (target * Math.min(1, state.clock.elapsedTime / 1.6) - u.uAmt.value) * 0.08;
+    if (Math.abs(target - u.uAmt.value) > 0.005) state.invalidate(); // termina el fundido también en modo bajo demanda
 
     state.gl.setRenderTarget(rt);
     state.gl.render(state.scene, state.camera);
