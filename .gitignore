@@ -1,0 +1,27 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Next.js / build output
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing (Playwright / Lighthouse)
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+.lighthouseci/
+lighthouse-reports/
+
+# Misc
+.DS_Store
+*.log
+.vercel
