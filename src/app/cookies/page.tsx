@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Política de cookies",
   description: "lppstech.com no usa cookies ni herramientas de seguimiento. Te explicamos qué significa y cómo gestionar las cookies en tu navegador.",
   alternates: { canonical: "/cookies/" },
+  openGraph: { title: "Política de cookies · LPPS", url: "/cookies/", type: "article", locale: "es_ES", siteName: "LPPS", description: "lppstech.com no usa cookies ni herramientas de seguimiento. Te explicamos qué significa y cómo gestionar las cookies en tu navegador." },
 };
 
 export default function Cookies() {

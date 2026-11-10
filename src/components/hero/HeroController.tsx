@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useMotion } from "@/lib/motion";
+import { getLenis } from "@/lib/scroll";
 import { heroState } from "./heroState";
 
 /**
@@ -68,9 +69,24 @@ export default function HeroController() {
           },
           0.04
         );
+        // remate: un barrido de luz cruza el muro y el zorro aparece grabado en él
+        const sweep = flip.querySelector<HTMLElement>(".flip__sweep");
+        const fox = flip.querySelector<SVGElement>(".flip__fox");
+        if (sweep) tl.fromTo(sweep, { xPercent: -130, autoAlpha: 0 }, { xPercent: 130, autoAlpha: 1, duration: 0.32, ease: "power1.inOut" }, 0.42);
+        if (fox) tl.fromTo(fox, { autoAlpha: 0, scale: 0.86 }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: "power2.out" }, 0.5);
         // tramo final: la sección siguiente sube por encima de las baldosas ya colocadas
         tl.to({}, { duration: 0.3 }, 0.7);
+        // Con teclado: si algo del hero recibe el foco cuando ya está tapado, se vuelve al inicio
+        const onFocus = () => {
+          if (heroState.progress > 0.02) {
+            const lenis = getLenis();
+            if (lenis) lenis.scrollTo(0, { immediate: true });
+            else window.scrollTo(0, 0);
+          }
+        };
+        content.addEventListener("focusin", onFocus);
         return () => {
+          content.removeEventListener("focusin", onFocus);
           heroState.progress = 0;
           heroState.visible = true;
         };

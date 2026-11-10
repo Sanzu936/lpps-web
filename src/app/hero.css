@@ -83,6 +83,29 @@
   }
 }
 
+/* Póster del campo 3D: aparece en cuanto la primera pantalla está pintada y el WebGL
+   en vivo se funde encima cuando arranca (con el primer gesto o tras unos segundos). */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+/* la imagen solo se pide con la clase (tras el primer pintado), así no compite con él */
+html.grain-on .hero__bg::after {
+  opacity: 1;
+  background: linear-gradient(90deg, rgba(3, 5, 11, 0.85) 0%, rgba(3, 5, 11, 0.3) 55%, rgba(3, 5, 11, 0) 100%),
+    linear-gradient(0deg, rgba(3, 5, 11, 0.9) 0%, rgba(3, 5, 11, 0) 42%), linear-gradient(180deg, rgba(3, 5, 11, 0.6) 0%, rgba(3, 5, 11, 0) 18%),
+    url("../assets/hero-poster-escritorio.webp") center / cover no-repeat;
+}
+@media (max-width: 759px) {
+  html.grain-on .hero__bg::after {
+    background: linear-gradient(0deg, rgba(3, 5, 11, 0.92) 0%, rgba(3, 5, 11, 0.2) 60%), linear-gradient(180deg, rgba(3, 5, 11, 0.6) 0%, rgba(3, 5, 11, 0) 18%),
+      url("../assets/hero-poster-movil.webp") center / cover no-repeat;
+  }
+}
+
 /* Lienzo 3D (se carga después) */
 .hero__canvas {
   position: absolute;
@@ -115,7 +138,7 @@
   flex-direction: column;
   justify-content: flex-end;
   gap: clamp(1.1rem, 2.4vw, 1.75rem);
-  padding-top: calc(var(--header-h) + 1.5rem);
+  padding-top: calc(var(--header-h) + 2.75rem);
   padding-bottom: clamp(4.5rem, 11vh, 7.5rem);
   transform-origin: 30% 60%;
   will-change: transform;
@@ -211,15 +234,16 @@
 .hero__ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 1.25rem;
   align-items: center;
 }
-.hero__ctas .btn {
+.hero__ctas .btn:not(.btn--ghost) {
   animation: hero-btn 0.6s 1.15s var(--ease-out) both;
 }
 .hero__ctas .btn--ghost {
-  animation-name: hero-btn-ghost;
+  animation: hero-btn-ghost 0.6s 1.15s var(--ease-out) both;
 }
+
 .hero__ctas .btn__label,
 .hero__ctas .btn__dot {
   animation: hero-label 0.5s 1.7s var(--ease-out) both;
@@ -495,6 +519,25 @@
 .flip.is-active .flip__tile {
   visibility: visible;
 }
+.flip__sweep {
+  position: absolute;
+  inset: -10% -30%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(191, 233, 247, 0.12) 46%, rgba(255, 255, 255, 0.45) 50%, rgba(191, 233, 247, 0.12) 54%, transparent 62%);
+  mix-blend-mode: screen;
+  visibility: hidden;
+}
+.flip__fox {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: clamp(120px, 18vw, 230px);
+  height: auto;
+  translate: -50% -50%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 22px rgba(91, 196, 226, 0.75)) drop-shadow(0 0 60px rgba(91, 196, 226, 0.35));
+  visibility: hidden;
+}
 @media (min-width: 760px) {
   .flip {
     grid-template-columns: repeat(12, 1fr);
@@ -510,6 +553,8 @@
   .hero__sub-text,
   .hero__note-text,
   .hero__ctas .btn,
+  .hero__ctas .btn:not(.btn--ghost),
+  .hero__ctas .btn--ghost,
   .hero__ctas .btn__label,
   .hero__ctas .btn__dot,
   .hero__log-line,
@@ -530,7 +575,7 @@
     color: var(--text);
     background-size: 0 0;
   }
-  .hero__ctas .btn {
+  .hero__ctas .btn:not(.btn--ghost) {
     background-color: var(--sky);
   }
   .wf::before,

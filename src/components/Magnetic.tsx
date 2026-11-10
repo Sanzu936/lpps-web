@@ -7,7 +7,18 @@ import { loadMotion } from "@/lib/motion";
  * Efecto magnético: cuando el cursor se acerca, el hijo se desplaza hacia él
  * y su etiqueta se mueve un poco más (paralaje interno). Solo ratón/trackpad.
  */
-export default function Magnetic({ children, radius = 140, strength = 0.42 }: { children: ReactNode; radius?: number; strength?: number }) {
+export default function Magnetic({
+  children,
+  radius = 140,
+  strength = 0.42,
+  maxShift = 14,
+}: {
+  children: ReactNode;
+  radius?: number;
+  strength?: number;
+  /** desplazamiento máximo en px */
+  maxShift?: number;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -37,10 +48,12 @@ export default function Magnetic({ children, radius = 140, strength = 0.42 }: { 
       if (dist < reach) {
         active = true;
         const pull = 1 - dist / reach;
-        xTo(dx * strength * (0.5 + pull));
-        yTo(dy * strength * (0.5 + pull));
-        ixTo?.(dx * 0.18);
-        iyTo?.(dy * 0.18);
+        // desplazamiento acotado: se pega al cursor sin invadir lo que tiene al lado
+        const clamp = (v: number, m: number) => Math.max(-m, Math.min(m, v));
+        xTo(clamp(dx * strength * (0.5 + pull), maxShift));
+        yTo(clamp(dy * strength * (0.5 + pull), maxShift * 0.7));
+        ixTo?.(clamp(dx * 0.18, maxShift * 0.5));
+        iyTo?.(clamp(dy * 0.18, maxShift * 0.4));
         target.style.setProperty("--mag", pull.toFixed(3));
       } else if (active) {
         active = false;
@@ -58,7 +71,7 @@ export default function Magnetic({ children, radius = 140, strength = 0.42 }: { 
       cancelled = true;
       off();
     };
-  }, [radius, strength]);
+  }, [radius, strength, maxShift]);
 
   return (
     <span ref={ref} className="magnetic">

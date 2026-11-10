@@ -3,6 +3,7 @@ import BookingLink from "../BookingLink";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import HeroCanvas from "./HeroCanvas";
 import HeroController from "./HeroController";
+import FoxMark from "../FoxMark";
 
 const TITLE = "Webs que no parecen de plantilla.";
 const TILES = 96; // 12×8 en escritorio, 8×12 en móvil
@@ -62,7 +63,7 @@ export default function Hero() {
 
           <div className="hero__ctas wf wf--skeleton" data-wf="a · botones">
             <BookingLink magnetic radius={120} />
-            <a className="btn btn--ghost" href="#como-funciona" data-cursor="Ver">
+            <a className="btn btn--ghost" href="#como-funciona">
               <span className="btn__label">Cómo trabajamos</span>
             </a>
           </div>
@@ -88,6 +89,8 @@ export default function Hero() {
           {Array.from({ length: TILES }, (_, i) => (
             <span className="flip__tile" key={i} />
           ))}
+          <span className="flip__sweep" />
+          <FoxMark className="flip__fox" />
         </div>
       </div>
       <HeroController />

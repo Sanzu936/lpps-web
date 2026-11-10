@@ -1,12 +1,13 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/hero/Hero";
 import Tape from "@/components/Tape";
 import Nosotros from "@/components/sections/Nosotros";
-import ComoFunciona from "@/components/sections/ComoFunciona";
-import Trabajos from "@/components/sections/Trabajos";
-import Preguntas from "@/components/sections/Preguntas";
-import Contacto from "@/components/sections/Contacto";
+const ComoFunciona = dynamic(() => import("@/components/sections/ComoFunciona"));
+const Trabajos = dynamic(() => import("@/components/sections/Trabajos"));
+const Preguntas = dynamic(() => import("@/components/sections/Preguntas"));
+const Contacto = dynamic(() => import("@/components/sections/Contacto"));
 import { EMAIL, PHONE_DISPLAY, SITE_DESCRIPTION, SITE_URL } from "@/config/site";
 import "./hero.css";
 import "./sections.css";

@@ -16,7 +16,6 @@ export default function BookingLink({ children = "Agendar llamada", className = 
     <a
       href={BOOKING_HREF}
       className={className}
-      data-cursor="Agendar"
       {...(BOOKING_IS_EXTERNAL ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       <span className="btn__dot" aria-hidden="true" />

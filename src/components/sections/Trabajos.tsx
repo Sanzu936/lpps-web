@@ -188,10 +188,10 @@ export default function Trabajos() {
           const screens = d.querySelectorAll(".screen");
           const phone = d.querySelector(".phone");
           gsap
-            .timeline({ scrollTrigger: { trigger: d, start: "top 85%", end: "top 25%", scrub: 0.6 } })
-            .fromTo(lid, { rotationX: -88 }, { rotationX: 0, ease: "power2.out", duration: 1 }, 0)
-            .fromTo(screens, { "--power": 0 }, { "--power": 1, duration: 0.5, ease: "power1.in" }, 0.55)
-            .fromTo(phone, { yPercent: 40, rotate: 9, autoAlpha: 0 }, { yPercent: 0, rotate: -4, autoAlpha: 1, duration: 0.8 }, 0.3);
+            .timeline({ scrollTrigger: { trigger: d, start: "top 92%", end: "top 55%", scrub: 0.5 } })
+            .fromTo(lid, { rotationX: -80 }, { rotationX: 0, ease: "power2.out", duration: 1 }, 0)
+            .fromTo(screens, { "--power": 0.15 }, { "--power": 1, duration: 0.45, ease: "power1.in" }, 0.5)
+            .fromTo(phone, { yPercent: 30, rotate: 9, opacity: 0.35 }, { yPercent: 0, rotate: -4, opacity: 1, duration: 0.8 }, 0.25);
         });
       });
     },

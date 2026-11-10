@@ -46,7 +46,7 @@ export const TRABAJOS: Trabajo[] = [
     nombre: "Esta misma web",
     tipo: "Web de agencia",
     descripcion:
-      "Diseño propio, 3D en tiempo real, animaciones ligadas al scroll y una versión ligera para móvil. Pasa el ratón o toca la pantalla para recorrerla entera.",
+      "Diseño propio, 3D en tiempo real, cristal líquido y animaciones ligadas al scroll, con una versión más ligera para que en el móvil vaya igual de fina.",
     muestra: false,
     escritorio: capturas.escritorio,
     movil: capturas.movil,

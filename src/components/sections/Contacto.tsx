@@ -50,12 +50,12 @@ export default function Contacto() {
     <section ref={root} id="contacto" className="section contacto" aria-labelledby="contacto-title">
       <div className="wrap contacto__grid">
         <div>
-        <RevealTitle id="contacto-title" className="contacto__title" lines={["¿Hablamos de", "tu web?"]} />
+        <RevealTitle id="contacto-title" className="contacto__title" lines={["¿Hablamos", "de tu web?"]} />
         <p className="contacto__lede">
           Llámanos o escríbenos. Te contamos cómo sería tu web y, si te encaja, te la enseñamos hecha antes de que pagues nada.
         </p>
 
-        <a className="board" href={PHONE_HREF} aria-label={`Llamar al ${PHONE_DISPLAY}`} data-cursor="Llamar">
+        <a className="board" href={PHONE_HREF} aria-label={`Llamar al ${PHONE_DISPLAY.replace(/ /g, "")}`} data-cursor="Llamar">
           {chars.map((c, i) =>
             c === " " ? (
               <span className="flap flap--gap" key={i} aria-hidden="true" />
@@ -69,12 +69,12 @@ export default function Contacto() {
 
         <div className="contacto__actions">
           <Magnetic radius={110}>
-            <a className="btn" href={PHONE_HREF} data-cursor="Llamar">
+            <a className="btn" href={PHONE_HREF}>
               <span className="btn__dot" aria-hidden="true" />
               <span className="btn__label">Llamar ahora</span>
             </a>
           </Magnetic>
-          <a className="btn btn--ghost" href={EMAIL_HREF} data-cursor="Escribir">
+          <a className="btn btn--ghost" href={EMAIL_HREF}>
             <span className="btn__label">Escribir a {EMAIL}</span>
           </a>
         </div>

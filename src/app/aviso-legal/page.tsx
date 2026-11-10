@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Aviso legal",
   description: "Aviso legal de lppstech.com: datos del titular, condiciones de uso, propiedad intelectual y responsabilidad.",
   alternates: { canonical: "/aviso-legal/" },
+  openGraph: { title: "Aviso legal · LPPS", url: "/aviso-legal/", type: "article", locale: "es_ES", siteName: "LPPS", description: "Aviso legal de lppstech.com: datos del titular, condiciones de uso, propiedad intelectual y responsabilidad." },
 };
 
 export default function AvisoLegal() {

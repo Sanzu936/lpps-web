@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Política de privacidad",
   description: "Cómo trata LPPS tus datos personales conforme al RGPD y a la LOPDGDD: finalidades, base legal, plazos y tus derechos.",
   alternates: { canonical: "/privacidad/" },
+  openGraph: { title: "Política de privacidad · LPPS", url: "/privacidad/", type: "article", locale: "es_ES", siteName: "LPPS", description: "Cómo trata LPPS tus datos personales conforme al RGPD y a la LOPDGDD: finalidades, base legal, plazos y tus derechos." },
 };
 
 export default function Privacidad() {

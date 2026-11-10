@@ -35,7 +35,7 @@
 }
 .legal__body p,
 .legal__body li {
-  color: #2c2e4a;
+  color: var(--mist);
   max-width: 70ch;
 }
 .legal__body p + p {
