@@ -972,6 +972,7 @@
 .laptop {
   position: relative;
   width: 88%;
+  margin-left: 5%; /* la base sobresale un 6 % por cada lado: así no se sale de la pantalla */
   transform-style: preserve-3d;
   -webkit-box-reflect: below 6px linear-gradient(transparent 78%, rgba(255, 255, 255, 0.14));
 }
@@ -1073,8 +1074,9 @@
 }
 .screen.is-scrolling .screen__img {
   transform: translateY(calc(-100% + 100cqh));
-  transition-duration: calc(var(--ratio, 6) * 1.1s);
-  transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  /* Más larga cuanto más alta es la página, pero nunca más de 9 s (la del móvil mide 22 pantallas). */
+  transition-duration: min(calc(var(--ratio, 6) * 1.1s), 9s);
+  transition-timing-function: cubic-bezier(0.3, 0, 0.55, 1);
 }
 .screen__toggle {
   position: absolute;
@@ -1191,6 +1193,8 @@
   color: var(--paper);
 }
 .ba__range {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  scroll-margin-bottom: 1.5rem;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1588,5 +1592,28 @@
 @media (min-width: 1000px) {
   .fox-build {
     width: min(100%, 420px);
+  }
+}
+
+/* Pantallas grandes: Cómo funciona gana escala para no quedar perdido en el espacio */
+@media (min-width: 1500px) {
+  .hstep__copy {
+    max-width: 40rem;
+  }
+  .hsteps.is-horizontal .hstep__title {
+    font-size: clamp(3rem, 3.3vw, 4.4rem);
+  }
+  .hsteps.is-horizontal .hstep__text {
+    font-size: 1.3rem;
+    max-width: 36ch;
+  }
+  .hsteps.is-horizontal .hstep__n {
+    width: 4.2rem;
+    height: 4.2rem;
+    font-size: 1.9rem;
+  }
+  .vis {
+    max-width: 700px;
+    max-height: 58svh;
   }
 }

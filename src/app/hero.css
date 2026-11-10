@@ -315,6 +315,11 @@ html.grain-on .hero__bg::after {
   font-variant-numeric: tabular-nums;
   animation: wf-label 2.6s 0.35s var(--ease-out) both;
 }
+/* La etiqueta del titular va a la derecha para no tapar el registro de montaje, que va a la izquierda. */
+.hero__title.wf::after {
+  left: auto;
+  right: -14px;
+}
 .hero__sub.wf::before {
   animation-delay: 0.3s;
 }

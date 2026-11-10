@@ -98,6 +98,8 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
   /** En modo ligero solo se renderiza hasta este instante (se amplía con cada gesto). */
   const activeUntil = useRef(performance.now() + 2600);
   const reduce = useMemo(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches, []);
+  // Con movimiento reducido el campo solo se redibuja cuando el usuario mueve el puntero o hace scroll.
+  const demand = lite || reduce;
 
   const geometry = useMemo(() => {
     const g = new THREE.BoxGeometry(0.9, 0.9, 1);
@@ -166,13 +168,13 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       pointer.current.ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
       pointer.current.active = 1;
       pointer.current.last = performance.now();
-      if (lite) {
+      if (demand) {
         activeUntil.current = performance.now() + 1500;
         invalidate();
       }
     };
     const onScroll = () => {
-      if (!lite) return;
+      if (!demand) return;
       activeUntil.current = performance.now() + 900;
       invalidate();
     };
@@ -185,7 +187,7 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       window.removeEventListener("scroll", onScroll);
       void el;
     };
-  }, [gl, lite, invalidate]);
+  }, [gl, demand, invalidate]);
 
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const plane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), []);
@@ -210,7 +212,10 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
     // Sin interacción reciente: el "foco" recorre la rejilla solo (útil en móvil)
     const idle = performance.now() - pointer.current.last > 2600;
     let target: THREE.Vector2;
-    if (idle || reduce) {
+    if (reduce) {
+      // Sin recorrido automático: el foco se queda quieto o sigue al puntero.
+      target = pointer.current.ndc;
+    } else if (idle) {
       auto.set(Math.sin(t * 0.37) * (window.innerWidth < window.innerHeight ? 0.45 : 0.75) + (window.innerWidth < window.innerHeight ? 0.05 : 0.15), Math.cos(t * 0.29) * 0.45 + (mobile ? -0.1 : 0.15));
       target = auto;
     } else {
@@ -227,13 +232,13 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
     const pressTarget = reduce ? 0.6 : idle ? 0.75 : 1;
     u.uPress.value += (pressTarget - u.uPress.value) * (1 - Math.pow(0.02, dt));
 
-    // Scroll: la cámara se inclina y las baldosas se aplanan al pasar a claro
+    // Scroll: la cámara se inclina y las baldosas se aplanan mientras se voltea el muro
     const p = heroState.progress;
     const scrollY = mobile ? Math.min(window.scrollY / window.innerHeight, 1) : 0;
     u.uFlat.value = p * 0.9;
     camera.position.set(camBase.x, camBase.y - p * 4 - scrollY * 2, camBase.z - p * 3);
     camera.lookAt(0, p * 2, 0);
-    if (lite && performance.now() < activeUntil.current && heroState.visible) state.invalidate();
+    if (demand && performance.now() < activeUntil.current && heroState.visible) state.invalidate();
   });
 
   void size;
@@ -264,10 +269,11 @@ export default function TileField({ onReady, lite = false }: Props) {
   const mobile = useMemo(() => window.matchMedia("(max-width: 759px), (pointer: coarse)").matches, []);
   const cols = mobile ? 20 : lite ? 30 : 40;
   const rows = mobile ? 26 : lite ? 18 : 24;
+  const demand = lite || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   return (
     <Canvas
       flat
-      frameloop={lite ? "demand" : "always"}
+      frameloop={demand ? "demand" : "always"}
       dpr={lite ? 0.75 : mobile ? [1, 1.25] : [1, 1.75]}
       gl={{ antialias: !mobile, alpha: false, powerPreference: "high-performance" }}
       camera={{ position: mobile ? [0, -13, 14] : [2, -12, 10.5], fov: mobile ? 52 : 42, near: 0.1, far: 80 }}
@@ -275,7 +281,7 @@ export default function TileField({ onReady, lite = false }: Props) {
     >
       <Field cols={cols} rows={rows} mobile={mobile} lite={lite} onReady={onReady} />
       <LensPass radius={mobile ? 78 : 124} />
-      {lite ? null : <Pauser />}
+      {demand ? null : <Pauser />}
     </Canvas>
   );
 }

@@ -28,8 +28,8 @@ function detectGpu(): Gpu {
 
 /**
  * Carga diferida del 3D: la primera pantalla se pinta e interactúa sin esperar a WebGL.
- * El lienzo se prepara con el primer gesto (mover el ratón, tocar, hacer scroll) o tras
- * unos segundos en reposo.
+ * El lienzo se prepara al mover el ratón o pulsar una tecla, o en el primer momento libre
+ * unos segundos después de la carga (en móvil, siempre así).
  * - Con GPU: anima de continuo mientras el hero está a la vista.
  * - Sin GPU (WebGL por software): versión ligera que solo renderiza mientras hay interacción.
  */
@@ -40,13 +40,14 @@ export default function HeroCanvas() {
   useEffect(() => {
     let cancelled = false;
     let timer = 0;
-    const events = ["pointermove", "pointerdown", "wheel", "touchstart", "keydown", "scroll"] as const;
+    // Ni scroll ni rueda ni toque: arrancar WebGL en pleno scroll daría un tirón justo en la transición.
+    const events = ["pointermove", "pointerdown", "keydown"] as const;
     const detach = () => {
       events.forEach((ev) => window.removeEventListener(ev, onGesture));
       window.clearTimeout(timer);
     };
-    // Crear un contexto WebGL puede costar cientos de ms sin GPU: se hace con el primer
-    // gesto del usuario o cuando la página ya lleva un rato en reposo, nunca durante la carga.
+    // Crear un contexto WebGL puede costar cientos de ms sin GPU: se hace al mover el ratón
+    // o cuando el navegador queda libre unos segundos después de la carga, nunca durante ella.
     const boot = (interacted: boolean) => {
       detach();
       if (cancelled) return;
@@ -55,17 +56,18 @@ export default function HeroCanvas() {
       setMode(gpu === "hardware" ? "full" : "lite");
       void interacted;
     };
-    function onGesture() {
+    function onGesture(e: Event) {
+      if ("pointerType" in e && (e as PointerEvent).pointerType === "touch") return; // un toque suele ser el inicio de un scroll
       boot(true);
     }
     const arm = () => {
       if (cancelled) return;
-      events.forEach((ev) => window.addEventListener(ev, onGesture, { passive: true, once: true }));
+      events.forEach((ev) => window.addEventListener(ev, onGesture, { passive: true }));
       timer = window.setTimeout(() => {
         const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
         if (ric) ric(() => boot(false), { timeout: 2000 });
         else boot(false);
-      }, 9000);
+      }, 4000);
     };
     if (document.readyState === "complete") arm();
     else window.addEventListener("load", arm, { once: true });

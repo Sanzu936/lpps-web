@@ -58,8 +58,12 @@ let page = await open({ width: 1440, height: 900 }, false);
 const toNosotros = () =>
   page.evaluate(() => window.scrollTo(0, document.getElementById("nosotros").getBoundingClientRect().top + scrollY - 40));
 res.escritorio = await shot(page, "lpps-escritorio", 1000);
-await page.addStyleTag({ content: ".site-header{display:none!important}" });
-// antes / después: la sección "Quiénes somos" terminada y en fase de plano
+// antes / después: la sección "Quiénes somos" terminada y en fase de plano, con el mismo
+// encuadre en las dos (sin cabecera, sin hero ni cintas que se cuelen por arriba)
+const AISLAR = ".site-header,.hero,.tape-slot{display:none!important}";
+await page.addStyleTag({ content: AISLAR });
+await page.evaluate(() => window.dispatchEvent(new Event("resize")));
+await page.waitForTimeout(600);
 await toNosotros();
 await page.waitForTimeout(900);
 res.final = await shot(page, "lpps-final", 1440);
@@ -71,7 +75,9 @@ await page.context().close();
 
 page = await open({ width: 390, height: 844 }, true);
 res.movil = await shot(page, "lpps-movil", 390);
-await page.addStyleTag({ content: ".site-header{display:none!important}" });
+await page.addStyleTag({ content: AISLAR });
+await page.evaluate(() => window.dispatchEvent(new Event("resize")));
+await page.waitForTimeout(600);
 await toNosotros();
 await page.waitForTimeout(900);
 res.finalMovil = await shot(page, "lpps-final-movil", 390);
