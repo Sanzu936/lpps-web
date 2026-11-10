@@ -5,6 +5,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/config/site
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 import GlassFx from "@/components/GlassFx";
+import FoxDefs from "@/components/FoxDefs";
 
 const anybody = localFont({
   src: "../fonts/anybody.woff2",
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <div className="ambient" aria-hidden="true" />
         <GlassFx />
+        <FoxDefs />
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>

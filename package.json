@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/defer-hydration.mjs",
     "start": "serve out -l 3000",
     "capturas": "node scripts/capturas.mjs"
   },

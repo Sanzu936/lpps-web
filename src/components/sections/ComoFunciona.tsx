@@ -174,10 +174,14 @@ export default function ComoFunciona() {
             end: "bottom bottom",
             scrub: 0.6,
             invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              gsap.set(fill, { scaleX: self.progress });
-              marks.forEach((m, i) => m.classList.toggle("is-on", self.progress >= (i + 0.5) / (marks.length + 0.5)));
-            },
+          },
+          // Se lee la posición real del carril (ya suavizada), no la del scroll: así el punto
+          // de cada paso se enciende justo cuando ese paso cruza el centro de la pantalla.
+          onUpdate() {
+            gsap.set(fill, { scaleX: this.progress() });
+            const x = Number(gsap.getProperty(track, "x"));
+            const steps = panels.slice(panels.length - marks.length);
+            marks.forEach((m, i) => m.classList.toggle("is-on", steps[i].offsetLeft + x < window.innerWidth * 0.5));
           },
         });
 

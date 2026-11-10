@@ -15,8 +15,17 @@ export default function FoxBuild() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const root = ref.current!;
-        const lines = root.querySelectorAll<SVGPathElement>(".fx-line");
-        const fills = root.querySelectorAll<SVGPathElement>(".fx-fill");
+        const svgEl = root.querySelector("svg")!;
+        // Las líneas solo hacen falta para la animación: se crean aquí, no en el HTML.
+        const lines = [fox.navy, fox.sky, fox.white].map((d) => {
+          const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          p.setAttribute("class", "fx-line");
+          p.setAttribute("d", d);
+          p.setAttribute("pathLength", "1");
+          svgEl.appendChild(p);
+          return p;
+        });
+        const fills = root.querySelectorAll<SVGElement>(".fx-fill");
         gsap.set(lines, { strokeDasharray: 1, strokeDashoffset: 1 });
         gsap.set(fills, { opacity: 0 });
         gsap
@@ -36,7 +45,10 @@ export default function FoxBuild() {
           ry(-dy * 18);
         };
         window.addEventListener("pointermove", onMove, { passive: true });
-        return () => window.removeEventListener("pointermove", onMove);
+        return () => {
+          window.removeEventListener("pointermove", onMove);
+          lines.forEach((l) => l.remove());
+        };
       });
     },
     ref
@@ -46,12 +58,9 @@ export default function FoxBuild() {
     <div className="fox-build" ref={ref} aria-hidden="true" style={{ perspective: "900px" }}>
       <span className="fox-build__halo" />
       <svg viewBox={fox.viewBox}>
-        <path className="fx-fill" d={fox.white} fill="#edf2fa" />
-        <path className="fx-fill" d={fox.navy} fill="#20508e" />
-        <path className="fx-fill" d={fox.sky} fill="#5bc4e2" />
-        <path className="fx-line" d={fox.navy} pathLength={1} />
-        <path className="fx-line" d={fox.sky} pathLength={1} />
-        <path className="fx-line" d={fox.white} pathLength={1} />
+        <use className="fx-fill" href="#fox-w" fill="#edf2fa" />
+        <use className="fx-fill" href="#fox-n" fill="#20508e" />
+        <use className="fx-fill" href="#fox-s" fill="#5bc4e2" />
       </svg>
     </div>
   );

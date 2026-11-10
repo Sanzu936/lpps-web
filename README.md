@@ -44,7 +44,7 @@ Cámbiala por la URL de vuestra agenda (Calendly, Cal.com, Google Calendar…) y
 
 Solo faltan los datos del titular. Están resaltados como **[Pendiente: …]** en:
 
-- `src/components/Legal.tsx` (componente `Titular`, usado en el aviso legal): nombre o razón social, NIF y domicilio.
+- `src/components/Legal.tsx` (componente `Titular`, usado en el aviso legal): nombre o razón social, NIF, domicilio y, solo si es una sociedad, los datos de inscripción en el registro mercantil (si sois autónomos, borrad esa línea).
 - `src/app/privacidad/page.tsx` (tabla «Responsable del tratamiento»): nombre o razón social, NIF y domicilio.
 
 Sustituye cada `<Pendiente>…</Pendiente>` por el dato real (texto normal) y genera de nuevo la web.

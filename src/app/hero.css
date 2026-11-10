@@ -95,7 +95,7 @@
 /* la imagen solo se pide con la clase (tras el primer pintado), así no compite con él */
 html.grain-on .hero__bg::after {
   opacity: 1;
-  background: linear-gradient(90deg, rgba(3, 5, 11, 0.85) 0%, rgba(3, 5, 11, 0.3) 55%, rgba(3, 5, 11, 0) 100%),
+  background: linear-gradient(90deg, rgba(3, 5, 11, 0.9) 0%, rgba(3, 5, 11, 0.62) 42%, rgba(3, 5, 11, 0) 78%),
     linear-gradient(0deg, rgba(3, 5, 11, 0.9) 0%, rgba(3, 5, 11, 0) 42%), linear-gradient(180deg, rgba(3, 5, 11, 0.6) 0%, rgba(3, 5, 11, 0) 18%),
     url("../assets/hero-poster-escritorio.webp") center / cover no-repeat;
 }
@@ -201,6 +201,11 @@ html.grain-on .hero__bg::after {
 }
 .hero__sub-text {
   --text: var(--mist);
+}
+/* Halo oscuro pegado a las letras: el texto mantiene AA aunque haya baldosas iluminadas detrás. */
+.hero__sub-text,
+.hero__note-text {
+  text-shadow: 0 1px 2px rgba(3, 5, 11, 0.95), 0 0 12px rgba(3, 5, 11, 0.9), 0 0 28px rgba(3, 5, 11, 0.8);
 }
 .hero__note-text {
   --text: var(--mist);

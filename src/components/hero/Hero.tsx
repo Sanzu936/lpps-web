@@ -49,8 +49,7 @@ export default function Hero() {
             <span className="hero__log-line">Web lista. Así trabajamos.</span>
           </p>
 
-          <h1 id="hero-title" className="hero__title wf" data-wf="h1 · titular">
-            <span className="sr-only">{TITLE}</span>
+          <h1 id="hero-title" className="hero__title wf" data-wf="h1 · titular" aria-label={TITLE}>
             <SplitTitle text={TITLE} />
           </h1>
 

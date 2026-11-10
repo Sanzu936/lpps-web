@@ -43,6 +43,10 @@ export function Titular() {
         Domicilio: <Pendiente>domicilio completo</Pendiente>
       </li>
       <li>
+        Datos registrales: <Pendiente>solo si el titular es una sociedad, registro mercantil, tomo, folio, hoja e
+        inscripción; si es autónomo, borra esta línea</Pendiente>
+      </li>
+      <li>
         Correo electrónico: <a href="mailto:info@lppstech.com">info@lppstech.com</a>
       </li>
       <li>
