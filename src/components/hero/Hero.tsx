@@ -81,7 +81,7 @@ export default function Hero() {
         <span className="hero__flare" aria-hidden="true" />
 
         <div className="hero__hint" aria-hidden="true">
-          <span>Desliza</span>
+          <span>Sigue bajando</span>
           <span className="hero__hint-bar" />
         </div>
 

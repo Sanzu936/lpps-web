@@ -365,6 +365,10 @@ p {
   opacity: 1;
   transform: none;
 }
+/* tinte oscuro bajo el cristal: la cabecera se lee aunque pase por detrás algo claro (la cinta celeste) */
+.site-header__bar.glass {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 45%, rgba(140, 200, 255, 0.04) 100%), rgba(3, 5, 11, 0.72);
+}
 .site-header[data-scrolled="true"] .site-header__inner {
   padding-inline: calc(var(--gutter) + 0.9rem);
 }

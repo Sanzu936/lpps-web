@@ -31,13 +31,26 @@ export function loadMotion(): Promise<Motion> {
 export const motionNow = () => loaded;
 
 let refreshQueued = false;
+let pending = 0;
+let settle: () => void = () => {};
+/**
+ * Se resuelve cuando todas las secciones han preparado sus animaciones y ScrollTrigger
+ * ha recalculado posiciones (útil para saltar a un #ancla al entrar).
+ */
+export const motionSettled: Promise<void> = new Promise((r) => {
+  settle = r;
+  if (typeof window !== "undefined") window.setTimeout(r, 6000);
+});
+
 /** Un único ScrollTrigger.refresh() cuando termina la tanda de inicializaciones. */
 function scheduleRefresh(m: Motion) {
-  if (refreshQueued) return;
+  if (refreshQueued || pending > 0) return;
   refreshQueued = true;
   whenIdle(() => {
     refreshQueued = false;
+    if (pending > 0) return;
     m.ScrollTrigger.refresh();
+    settle();
   });
 }
 
@@ -52,17 +65,27 @@ export function useMotion(setup: Setup, scope?: RefObject<Element | null>, opts:
     let cancelled = false;
     let ctx: gsap.Context | null = null;
     let cleanup: void | (() => void);
+    if (!opts.immediate) pending++;
+    let counted = !opts.immediate;
+    const done = () => {
+      if (counted) {
+        counted = false;
+        pending--;
+      }
+    };
     const run = () =>
       loadMotion().then((m) => {
         if (cancelled) return;
         ctx = m.gsap.context(() => {
           cleanup = setup(m);
         }, scope?.current ?? undefined);
+        done();
         if (!opts.immediate) scheduleRefresh(m);
       });
     const cancel = opts.immediate ? (run(), () => {}) : whenIdle(run);
     return () => {
       cancelled = true;
+      done();
       cancel();
       if (typeof cleanup === "function") cleanup();
       ctx?.revert();

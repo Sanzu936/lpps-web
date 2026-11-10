@@ -35,6 +35,9 @@ export type AntesDespues = {
   muestra: boolean;
   antes: Captura & { etiqueta: string; alt: string };
   despues: Captura & { etiqueta: string; alt: string };
+  /** opcionales: versiones para móvil (se usan por debajo de 760 px) */
+  antesMovil?: Captura;
+  despuesMovil?: Captura;
 };
 
 // Las dimensiones se rellenan con scripts/capturas.mjs (genera src/content/capturas.json).
@@ -59,5 +62,7 @@ export const ANTES_DESPUES: AntesDespues = {
     "Así era la sección «Quiénes somos» de esta web antes de aplicar el diseño: solo estructura en líneas. Arrastra para ver la diferencia.",
   muestra: false,
   antes: { ...capturas.plano, etiqueta: "Antes", alt: "La sección Quiénes somos de LPPS en fase de plano: estructura en líneas, sin color ni tipografía." },
+  antesMovil: capturas.planoMovil,
+  despuesMovil: capturas.finalMovil,
   despues: { ...capturas.final, etiqueta: "Después", alt: "La sección Quiénes somos terminada: nombres de Pablo y Lori en tipografía grande y sus firmas." },
 };

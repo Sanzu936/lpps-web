@@ -9,12 +9,12 @@ export const setLenis = (l: Lenis | null) => {
 export const getLenis = () => lenis;
 
 /** Desplaza hasta un ancla respetando Lenis y el movimiento reducido. */
-export function scrollToHash(hash: string) {
+export function scrollToHash(hash: string, immediate = false) {
   const id = decodeURIComponent(hash.replace(/^#/, ""));
   const el = id ? document.getElementById(id) : document.body;
   if (!el) return false;
   if (lenis) {
-    lenis.scrollTo(el, { offset: 0, duration: 1.4 });
+    lenis.scrollTo(el, immediate ? { offset: 0, immediate: true, force: true } : { offset: 0, duration: 1.4 });
   } else {
     el.scrollIntoView({ behavior: "auto", block: "start" });
   }

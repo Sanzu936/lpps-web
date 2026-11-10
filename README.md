@@ -42,7 +42,7 @@ Cámbiala por la URL de vuestra agenda (Calendly, Cal.com, Google Calendar…) y
 
 ## Datos legales pendientes
 
-Solo faltan los datos del titular. Están marcados en amarillo como **[Pendiente: …]** en:
+Solo faltan los datos del titular. Están resaltados como **[Pendiente: …]** en:
 
 - `src/components/Legal.tsx` (componente `Titular`, usado en el aviso legal): nombre o razón social, NIF y domicilio.
 - `src/app/privacidad/page.tsx` (tabla «Responsable del tratamiento»): nombre o razón social, NIF y domicilio.

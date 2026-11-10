@@ -158,14 +158,18 @@ export default function ComoFunciona() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         section.classList.add("is-horizontal");
         const distance = () => track.scrollWidth - window.innerWidth;
+        // La sección se fija con position: sticky (sin cambio a position: fixed, que el
+        // navegador cuenta como salto de diseño): su altura reserva el recorrido horizontal.
+        const setRun = () => section.style.setProperty("--hrun", `${Math.max(0, distance())}px`);
+        setRun();
+        ScrollTrigger.addEventListener("refreshInit", setRun);
         const tween = gsap.to(track, {
           x: () => -distance(),
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: () => `+=${distance()}`,
-            pin: true,
+            end: "bottom bottom",
             scrub: 0.6,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
@@ -233,7 +237,11 @@ export default function ComoFunciona() {
           .fromTo(p4.querySelector(".launch-status"), { "--done": 0 }, { "--done": 1, duration: 0.05 }, 0.8)
           .from(p4.querySelectorAll(".launch-tiles span"), { rotationX: -90, stagger: 0.03, duration: 0.2 }, 0.8);
 
-        return () => section.classList.remove("is-horizontal");
+        return () => {
+          ScrollTrigger.removeEventListener("refreshInit", setRun);
+          section.classList.remove("is-horizontal");
+          section.style.removeProperty("--hrun");
+        };
       });
     },
     root

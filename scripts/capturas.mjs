@@ -32,7 +32,7 @@ const PLANO_CSS = `
 `;
 
 async function shot(page, file, width) {
-  const buf = await page.screenshot({ fullPage: file.includes("escritorio") || file.includes("movil") });
+  const buf = await page.screenshot({ fullPage: file === "lpps-escritorio" || file === "lpps-movil" });
   const img = sharp(buf).resize({ width, withoutEnlargement: true });
   const meta = await img.clone().toBuffer({ resolveWithObject: true });
   await img.clone().avif({ quality: 52, effort: 6 }).toFile(`${OUT}/${file}.avif`);
@@ -57,8 +57,6 @@ async function open(viewport, mobile) {
 let page = await open({ width: 1440, height: 900 }, false);
 const toNosotros = () =>
   page.evaluate(() => window.scrollTo(0, document.getElementById("nosotros").getBoundingClientRect().top + scrollY - 40));
-// Imagen Open Graph (1200×630) a partir del hero
-await sharp(await page.screenshot()).resize(1200, 630, { fit: "cover", position: "top" }).jpeg({ quality: 82, mozjpeg: true }).toFile("public/og.jpg");
 res.escritorio = await shot(page, "lpps-escritorio", 1000);
 await page.addStyleTag({ content: ".site-header{display:none!important}" });
 // antes / después: la sección "Quiénes somos" terminada y en fase de plano
@@ -73,6 +71,23 @@ await page.context().close();
 
 page = await open({ width: 390, height: 844 }, true);
 res.movil = await shot(page, "lpps-movil", 390);
+await page.addStyleTag({ content: ".site-header{display:none!important}" });
+await toNosotros();
+await page.waitForTimeout(900);
+res.finalMovil = await shot(page, "lpps-final-movil", 390);
+await page.addStyleTag({ content: PLANO_CSS });
+await toNosotros();
+await page.waitForTimeout(400);
+res.planoMovil = await shot(page, "lpps-plano-movil", 390);
+await page.context().close();
+
+// Imagen Open Graph a 1200×630 nativo (sin recortes)
+page = await open({ width: 1200, height: 630 }, false);
+await page.addStyleTag({
+  content: ".site-header,.hero__note,.hero__hint,.hero__log,.tape-slot{display:none!important} .hero__content{padding-top:48px!important;padding-bottom:56px!important} .hero__title{font-size:104px!important}",
+});
+await page.waitForTimeout(300);
+await sharp(await page.screenshot()).jpeg({ quality: 82, mozjpeg: true }).toFile("public/og.jpg");
 await page.context().close();
 
 await browser.close();

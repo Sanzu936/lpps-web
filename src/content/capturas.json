@@ -17,6 +17,16 @@
   "movil": {
     "src": "/trabajos/lpps-movil",
     "width": 390,
-    "height": 8748
+    "height": 8568
+  },
+  "finalMovil": {
+    "src": "/trabajos/lpps-final-movil",
+    "width": 390,
+    "height": 844
+  },
+  "planoMovil": {
+    "src": "/trabajos/lpps-plano-movil",
+    "width": 390,
+    "height": 844
   }
 }

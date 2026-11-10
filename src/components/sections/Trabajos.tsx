@@ -5,9 +5,11 @@ import { TRABAJOS, ANTES_DESPUES, type Captura } from "@/content/trabajos";
 import { withBase } from "@/config/site";
 import RevealTitle from "../RevealTitle";
 
-function Pic({ c, alt, sizes, eager = false }: { c: Captura; alt: string; sizes: string; eager?: boolean }) {
+function Pic({ c, alt, sizes, eager = false, mobile }: { c: Captura; alt: string; sizes: string; eager?: boolean; mobile?: Captura }) {
   return (
     <picture>
+      {mobile ? <source media="(max-width: 759px)" type="image/avif" srcSet={withBase(`${mobile.src}.avif`)} /> : null}
+      {mobile ? <source media="(max-width: 759px)" type="image/webp" srcSet={withBase(`${mobile.src}.webp`)} /> : null}
       <source type="image/avif" srcSet={withBase(`${c.src}.avif`)} sizes={sizes} />
       <img
         src={withBase(`${c.src}.webp`)}
@@ -133,10 +135,10 @@ function BeforeAfter() {
         onPointerCancel={() => (dragging.current = false)}
       >
         <div className="ba__img ba__img--before">
-          <Pic c={ad.antes} alt={ad.antes.alt} sizes="(min-width: 1100px) 1040px, 94vw" />
+          <Pic c={ad.antes} mobile={ad.antesMovil} alt={ad.antes.alt} sizes="(min-width: 1100px) 1040px, 94vw" />
         </div>
         <div className="ba__img ba__img--after">
-          <Pic c={ad.despues} alt={ad.despues.alt} sizes="(min-width: 1100px) 1040px, 94vw" />
+          <Pic c={ad.despues} mobile={ad.despuesMovil} alt={ad.despues.alt} sizes="(min-width: 1100px) 1040px, 94vw" />
         </div>
         <span className="ba__chip ba__chip--before" aria-hidden="true">
           {ad.antes.etiqueta}

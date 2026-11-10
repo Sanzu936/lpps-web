@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import type Lenis from "lenis";
 import { prefersReducedMotion } from "@/lib/env";
-import { loadMotion, motionNow, type Motion } from "@/lib/motion";
+import { loadMotion, motionNow, motionSettled, type Motion } from "@/lib/motion";
 import { whenIdle } from "@/lib/defer";
 import { setLenis, scrollToHash } from "@/lib/scroll";
 
@@ -49,12 +49,18 @@ export default function SmoothScroll() {
     if (location.hash) {
       const h = location.hash;
       // esperar a que las secciones fijadas hayan calculado su espacio
-      cancelHash = whenIdle(() =>
-        window.setTimeout(() => {
-          motionNow()?.ScrollTrigger.refresh();
-          requestAnimationFrame(() => scrollToHash(h));
-        }, 150)
-      );
+      let off = false;
+      cancelHash = () => {
+        off = true;
+      };
+      motionSettled.then(() => {
+        if (off) return;
+        requestAnimationFrame(() => {
+          scrollToHash(h, true);
+          // segunda pasada por si alguna sección cambió de altura al llegar
+          window.setTimeout(() => !off && motionNow() && scrollToHash(h, true), 500);
+        });
+      });
     }
 
     return () => {

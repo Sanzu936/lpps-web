@@ -8,6 +8,7 @@ import "./legal.css";
 export const metadata: Metadata = {
   title: "Página no encontrada",
   alternates: { canonical: null },
+  robots: null,
 };
 
 export default function NotFound() {
