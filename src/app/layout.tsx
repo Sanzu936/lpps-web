@@ -4,11 +4,12 @@ import "./globals.css";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/config/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
+import GlassFx from "@/components/GlassFx";
 
 const anybody = localFont({
   src: "../fonts/anybody.woff2",
   variable: "--font-anybody",
-  weight: "750 900",
+  weight: "200 900",
   style: "normal",
   display: "swap",
   declarations: [{ prop: "font-stretch", value: "60% 150%" }],
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c0e2b",
+  themeColor: "#03050b",
   width: "device-width",
   initialScale: 1,
 };
@@ -56,6 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${anybody.variable} ${schibsted.variable}`}>
       <body>
+        <div className="ambient" aria-hidden="true" />
+        <GlassFx />
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>

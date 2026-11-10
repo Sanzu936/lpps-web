@@ -24,7 +24,7 @@
    QUIÉNES SOMOS
    ========================================================================== */
 .nosotros {
-  background: var(--paper);
+  background: var(--abyss);
   padding-top: clamp(5rem, 10vw, 8rem);
 }
 .nosotros__head {
@@ -65,15 +65,14 @@
   height: auto;
   overflow: visible;
   font-family: var(--font-display);
-  fill: var(--graphite);
-  font-variation-settings: "wdth" 62, "wght" 760;
+  font-variation-settings: "wdth" 78, "wght" 260;
 }
 .elastic text {
   font-family: var(--font-display);
-  letter-spacing: 2px;
+  letter-spacing: -4px;
 }
-.elastic--accent {
-  fill: var(--ultra);
+.elastic {
+  filter: drop-shadow(0 18px 40px rgba(91, 196, 226, 0.12));
 }
 .signature {
   width: clamp(150px, 42%, 240px);
@@ -81,15 +80,18 @@
   margin: -0.5rem 0 1rem auto;
   overflow: visible;
 }
+.signature {
+  filter: drop-shadow(0 0 6px rgba(91, 196, 226, 0.75)) drop-shadow(0 0 18px rgba(91, 196, 226, 0.35));
+}
 .signature path {
   fill: none;
-  stroke: var(--ultra);
+  stroke: var(--sky);
   stroke-width: 16;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 .partner--lori .signature path {
-  stroke: var(--graphite);
+  stroke: var(--ice);
 }
 .partner__role {
   display: inline-block;
@@ -114,14 +116,14 @@
   list-style: none;
   margin: 1.5rem 0 0;
   padding: 0;
-  border-top: 1px solid rgba(20, 21, 43, 0.14);
+  border-top: 1px solid rgba(170, 205, 245, 0.14);
 }
 .partner__tasks li {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(20, 21, 43, 0.14);
+  border-bottom: 1px solid rgba(170, 205, 245, 0.14);
   font-weight: 600;
 }
 .partner__tasks li::before {
@@ -175,8 +177,8 @@
   width: fit-content;
   text-decoration: none;
   font-family: var(--font-display);
-  font-weight: 850;
-  font-stretch: 78%;
+  font-weight: 250;
+  font-stretch: 104%;
   font-size: clamp(2.6rem, 9vw, 7rem);
   line-height: 1;
   letter-spacing: -0.02em;
@@ -237,9 +239,9 @@
    ========================================================================== */
 .hsteps {
   position: relative;
-  background: var(--paper);
-  background-image: linear-gradient(rgba(43, 57, 232, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(43, 57, 232, 0.07) 1px, transparent 1px);
+  background: var(--abyss);
+  background-image: linear-gradient(rgba(91, 196, 226, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 196, 226, 0.07) 1px, transparent 1px);
   background-size: 40px 40px;
   overflow: hidden;
 }
@@ -279,13 +281,13 @@
   background: var(--graphite);
   color: var(--signal);
   font-family: var(--font-display);
-  font-weight: 900;
+  font-weight: 500;
   font-size: 1.6rem;
   margin-bottom: 1.25rem;
 }
 .hstep__title {
   font-size: clamp(2rem, 3.4vw, 3rem);
-  font-stretch: 88%;
+  font-stretch: 108%;
   margin-bottom: 1rem;
 }
 .hstep__text {
@@ -396,7 +398,7 @@
   justify-content: space-around;
   align-items: center;
   height: 2px;
-  background: rgba(20, 21, 43, 0.14);
+  background: rgba(170, 205, 245, 0.14);
 }
 .hsteps__fill {
   position: absolute;
@@ -412,8 +414,8 @@
   width: 1.9rem;
   height: 1.9rem;
   border-radius: 50%;
-  background: var(--paper);
-  box-shadow: inset 0 0 0 2px rgba(20, 21, 43, 0.25);
+  background: var(--abyss);
+  box-shadow: inset 0 0 0 2px rgba(170, 205, 245, 0.25);
   font-weight: 700;
   font-size: 0.8rem;
   color: var(--muted);
@@ -435,8 +437,8 @@
   max-height: 46svh;
   justify-self: center;
   border-radius: var(--radius-l);
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(20, 21, 43, 0.06), 0 30px 60px -30px rgba(20, 21, 43, 0.35);
+  background: var(--deep);
+  box-shadow: 0 1px 0 rgba(170, 205, 245, 0.06), 0 30px 60px -30px rgba(20, 21, 43, 0.35);
   overflow: hidden;
   isolation: isolate;
 }
@@ -509,8 +511,8 @@
 .bubble--in {
   left: 6%;
   top: 8%;
-  background: var(--paper);
-  color: var(--graphite);
+  background: var(--abyss);
+  color: var(--pearl);
   border-bottom-left-radius: 4px;
 }
 .bubble--out {
@@ -525,7 +527,7 @@
   bottom: 7%;
   display: flex;
   gap: 4px;
-  background: var(--paper);
+  background: var(--abyss);
   border-bottom-left-radius: 4px;
 }
 .bubble--typing span {
@@ -564,7 +566,7 @@
 .mini-browser {
   width: 84%;
   border-radius: 14px;
-  background: #fff;
+  background: var(--deep);
   box-shadow: 0 24px 50px -24px rgba(20, 21, 43, 0.45);
   overflow: hidden;
 }
@@ -573,19 +575,19 @@
   align-items: center;
   gap: 6px;
   padding: 10px 12px;
-  background: #e7e9f1;
+  background: #121c38;
 }
 .mini-browser__bar i {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #c5c9d9;
+  background: #2b3a63;
 }
 .mini-browser__url {
   margin-left: 10px;
   padding: 3px 10px;
   border-radius: 6px;
-  background: #fff;
+  background: var(--deep);
   font-size: 0.72rem;
   color: var(--muted);
 }
@@ -598,11 +600,11 @@
   --fill: 1;
   border-radius: 8px;
   border: 1.5px dashed rgba(43, 57, 232, calc(0.6 * (1 - var(--fill))));
-  background: color-mix(in srgb, var(--c, #e9ebf4) calc(var(--fill) * 100%), transparent);
+  background: color-mix(in srgb, var(--c, #18264a) calc(var(--fill) * 100%), transparent);
 }
 .mb-nav {
   height: 16px;
-  --c: #e9ebf4;
+  --c: #18264a;
 }
 .mb-hero {
   --c: var(--ink);
@@ -616,7 +618,7 @@
   display: block;
   height: 9px;
   border-radius: 4px;
-  background: var(--paper);
+  background: var(--abyss);
 }
 .mb-line--l {
   width: 70%;
@@ -640,10 +642,10 @@
 }
 .mb-card {
   height: 48px;
-  --c: #dde1f5;
+  --c: #1b2b55;
 }
 .mb-card:nth-child(2) {
-  --c: #ffe68a;
+  --c: rgba(91, 196, 226, 0.55);
 }
 .stamp {
   position: absolute;
@@ -657,30 +659,31 @@
   border: 3px solid var(--ultra);
   color: var(--ultra);
   font-family: var(--font-display);
-  font-weight: 900;
-  font-stretch: 80%;
+  font-weight: 500;
+  font-stretch: 100%;
   font-size: 1.05rem;
   line-height: 1;
   text-align: center;
   align-content: center;
   transform: rotate(-12deg);
   background: rgba(255, 255, 255, 0.85);
-  box-shadow: inset 0 0 0 5px #fff, inset 0 0 0 6.5px var(--ultra);
+  box-shadow: inset 0 0 0 5px var(--deep), inset 0 0 0 6.5px var(--ultra), 0 0 30px rgba(91, 196, 226, 0.35);
 }
 
 /* Paso 3 */
 .vis-tweak {
-  background: #fff;
+  background: var(--deep);
 }
 .tweak-card {
-  --accent: var(--ultra);
+  --accent: var(--sky);
+  --accent-ink: var(--on-sky);
   position: absolute;
   left: 8%;
   top: 10%;
   width: 70%;
   padding: 1.1rem;
   border-radius: 14px;
-  background: var(--paper);
+  background: var(--abyss);
   display: grid;
   gap: 0.6rem;
 }
@@ -704,7 +707,7 @@
 .tweak-card__line {
   height: 8px;
   border-radius: 4px;
-  background: #d5d9e8;
+  background: #22305a;
   width: 90%;
 }
 .tweak-card__line--s {
@@ -728,7 +731,7 @@
   gap: 10px;
   padding: 10px;
   border-radius: 14px;
-  background: #fff;
+  background: var(--deep);
   box-shadow: 0 10px 30px -12px rgba(20, 21, 43, 0.35);
 }
 .sw {
@@ -737,13 +740,14 @@
   border-radius: 50%;
 }
 .sw--1 {
-  background: var(--ultra);
+  background: var(--sky);
 }
 .sw--2 {
-  background: var(--signal);
+  background: var(--navy);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 .sw--3 {
-  background: #1f9d6b;
+  background: var(--pearl);
 }
 .tw-cursor {
   position: absolute;
@@ -840,7 +844,7 @@
   place-items: center;
   align-content: center;
   font-family: var(--font-display);
-  font-weight: 900;
+  font-weight: 300;
   font-size: clamp(2rem, 4vw, 2.6rem);
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -907,7 +911,7 @@
    TRABAJOS
    ========================================================================== */
 .trabajos {
-  background: var(--paper);
+  background: var(--abyss);
 }
 .trabajos__head {
   display: grid;
@@ -935,7 +939,7 @@
 }
 .work__name {
   font-size: clamp(2rem, 4vw, 3.2rem);
-  font-stretch: 88%;
+  font-stretch: 108%;
   margin: 0.75rem 0 0.4rem;
 }
 .work__type {
@@ -953,11 +957,11 @@
   gap: 0.45rem;
   padding: 0.35rem 0.8rem 0.35rem 0.6rem;
   border-radius: 999px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px rgba(20, 21, 43, 0.18);
+  background: var(--deep);
+  box-shadow: inset 0 0 0 1px rgba(170, 205, 245, 0.18);
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--graphite);
+  color: var(--pearl);
 }
 .sample-tag svg {
   width: 14px;
@@ -975,6 +979,7 @@
   position: relative;
   width: 88%;
   transform-style: preserve-3d;
+  -webkit-box-reflect: below 6px linear-gradient(transparent 78%, rgba(255, 255, 255, 0.14));
 }
 .laptop__lid {
   position: relative;
@@ -1004,7 +1009,7 @@
   padding-bottom: 3.2%;
   margin: 0 -6%;
   border-radius: 0 0 14px 14px;
-  background: linear-gradient(#cdd1e1, #a9aec5);
+  background: linear-gradient(#3a4568, #161d36);
   box-shadow: 0 24px 40px -18px rgba(20, 21, 43, 0.55);
 }
 .laptop__notch {
@@ -1015,7 +1020,7 @@
   height: 40%;
   transform: translateX(-50%);
   border-radius: 0 0 8px 8px;
-  background: #9ba0b9;
+  background: #0b1124;
 }
 .phone {
   position: absolute;
@@ -1112,7 +1117,7 @@
   border-radius: var(--radius-m);
   aspect-ratio: 16 / 10;
   background: var(--paper-2);
-  box-shadow: 0 0 0 1px rgba(20, 21, 43, 0.1), 0 40px 80px -40px rgba(20, 21, 43, 0.5);
+  box-shadow: 0 0 0 1px rgba(170, 205, 245, 0.1), 0 40px 80px -40px rgba(20, 21, 43, 0.5);
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
@@ -1171,8 +1176,8 @@
 }
 .ba__chip--before {
   left: 1rem;
-  background: #fff;
-  color: var(--graphite);
+  background: var(--deep);
+  color: var(--pearl);
 }
 .ba__chip--after {
   right: 1rem;
@@ -1202,14 +1207,14 @@
   color: var(--muted);
 }
 .ba__caption strong {
-  color: var(--graphite);
+  color: var(--pearl);
 }
 
 /* ==========================================================================
    PREGUNTAS
    ========================================================================== */
 .faq {
-  background: var(--paper);
+  background: var(--abyss);
 }
 .faq__grid {
   display: grid;
@@ -1238,9 +1243,9 @@
 }
 .seal__ring text {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 14px;
-  fill: var(--graphite);
+  fill: var(--pearl);
 }
 .seal__core {
   position: absolute;
@@ -1347,8 +1352,8 @@
   transition-delay: 120ms;
 }
 .faq mark {
-  background: linear-gradient(var(--signal), var(--signal)) no-repeat 0 85% / 0% 45%;
-  color: var(--graphite);
+  background: linear-gradient(rgba(91, 196, 226, 0.38), rgba(91, 196, 226, 0.38)) no-repeat 0 85% / 0% 45%;
+  color: var(--pearl);
   padding: 0 0.1em;
   transition: background-size 700ms 300ms var(--ease-expo);
 }
@@ -1368,31 +1373,41 @@
   }
 }
 .guarantee {
+  position: relative;
   display: grid;
-  gap: 0.4rem;
-  padding: 1.6rem;
+  gap: 0.5rem;
+  padding: 1.8rem;
   border-radius: var(--radius-m);
-  background: var(--graphite);
-  color: var(--muted-dark);
+  overflow: hidden;
+  color: var(--mist);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 60px -34px rgba(0, 0, 0, 0.9);
+}
+.guarantee::before {
+  content: "";
+  position: absolute;
+  right: -30%;
+  top: -60%;
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 196, 226, 0.28), transparent 65%);
+  pointer-events: none;
 }
 .guarantee strong {
+  position: relative;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  font-stretch: 86%;
-  font-weight: 850;
-  line-height: 1;
-  color: var(--paper);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-stretch: 110%;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--pearl);
 }
-.guarantee:nth-child(2) {
-  background: var(--signal);
-  color: #3d3300;
-}
-.guarantee:nth-child(2) strong {
-  color: var(--signal-ink);
-}
-.guarantee:nth-child(3) {
-  background: var(--ultra);
-  color: #dfe2ff;
+.guarantee span {
+  position: relative;
 }
 
 /* ==========================================================================
@@ -1418,7 +1433,7 @@
 }
 .contacto__title {
   font-size: clamp(3.2rem, 11vw, 10rem);
-  font-stretch: 82%;
+  font-stretch: 108%;
   line-height: 0.9;
 }
 .contacto__lede {
@@ -1441,10 +1456,10 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: clamp(1.9rem, 7.4vw, 6.4rem);
+  width: clamp(1.9rem, 5vw, 4.6rem);
   aspect-ratio: 0.7;
   border-radius: clamp(4px, 0.8vw, 10px);
-  background: linear-gradient(#20255e 0 50%, #1a1f52 50% 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0 50%, rgba(255, 255, 255, 0.04) 50% 100%), #0b1530;
   box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.35), 0 10px 24px -12px rgba(0, 0, 0, 0.6);
   perspective: 400px;
   overflow: hidden;
@@ -1469,9 +1484,9 @@
 .flap__face {
   display: block;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-stretch: 80%;
-  font-size: clamp(1.7rem, 6.4vw, 5.6rem);
+  font-weight: 300;
+  font-stretch: 100%;
+  font-size: clamp(1.7rem, 4.4vw, 4rem);
   line-height: 1;
   color: var(--signal);
   font-variant-numeric: tabular-nums;
@@ -1479,7 +1494,7 @@
 }
 @media (hover: hover) and (pointer: fine) {
   .board:hover .flap {
-    background: linear-gradient(#2a3075 0 50%, #232965 50% 100%);
+    background: linear-gradient(180deg, rgba(91, 196, 226, 0.22) 0 50%, rgba(91, 196, 226, 0.1) 50% 100%), #0b1530;
   }
 }
 .contacto__actions {
@@ -1518,4 +1533,47 @@
   .direct__number {
     transition: none;
   }
+}
+
+/* ==========================================================================
+   Zorro que se monta (cierre)
+   ========================================================================== */
+.contacto__grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+@media (min-width: 1000px) {
+  .contacto__grid {
+    grid-template-columns: 1.35fr 0.65fr;
+  }
+}
+.fox-build {
+  position: relative;
+  width: min(100%, 420px);
+  justify-self: center;
+  aspect-ratio: 0.75;
+}
+.fox-build svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.fox-build__halo {
+  position: absolute;
+  inset: 10% 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 196, 226, 0.28), transparent 65%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+.fox-build .fx-line {
+  fill: none;
+  stroke: var(--sky);
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(91, 196, 226, 0.8));
+}
+.fox-build .fx-fill {
+  opacity: 1;
 }

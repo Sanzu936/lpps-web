@@ -9,20 +9,22 @@ const OUT = "public/trabajos";
 mkdirSync(OUT, { recursive: true });
 
 const PLANO_CSS = `
-  .hero__canvas, .grain, .cursor, .tape, .flip { display: none !important; }
+  .hero__canvas, .grain, .cursor, .tape, .flip, .hero__flare, .ambient, .site-header__bar { display: none !important; }
   *, *::before, *::after { color: transparent !important; -webkit-text-stroke: 0 !important; text-shadow: none !important;
     box-shadow: none !important; background-color: transparent !important; background-image: none !important;
-    fill: transparent !important; stroke: transparent !important; animation: none !important; }
-  html, body, .hero, .hero__stage { background: #eef0f4 !important; }
+    fill: transparent !important; stroke: transparent !important; animation: none !important; backdrop-filter: none !important; }
+  html, body, .hero, .hero__stage { background: #03050b !important; }
   .hero__grid { display: block !important; opacity: 1 !important;
-    background-image: repeating-linear-gradient(90deg, rgba(43,57,232,.18) 0 1px, transparent 1px calc((100% - 2 * var(--gutter)) / 12)) !important; }
-  h1, p, .btn, .logo, .nav a, .header-call { outline: 1.5px dashed rgba(43,57,232,.7) !important; outline-offset: 6px; }
+    background-image: repeating-linear-gradient(90deg, rgba(91,196,226,.16) 0 1px, transparent 1px calc((100% - 2 * var(--gutter)) / 12)),
+      repeating-linear-gradient(0deg, rgba(91,196,226,.1) 0 1px, transparent 1px 64px) !important; }
+  h1, p, .btn, .logo, .nav a, .header-call { outline: 1px dashed rgba(91,196,226,.75) !important; outline-offset: 6px; }
   .hero__ch, .hero__sub-text, .hero__note-text, .nav a, .btn__label, .logo span, .hero__log-line {
-    background-image: linear-gradient(#c9cee6, #c9cee6) !important; background-repeat: no-repeat !important;
+    background-image: linear-gradient(rgba(91,196,226,.22), rgba(91,196,226,.22)) !important; background-repeat: no-repeat !important;
     background-size: 100% 0.62em !important; background-position: 0 58% !important; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .logo__mark path { stroke: rgba(91,196,226,.8) !important; stroke-width: 1.5px; }
   .hero__log-line:not(:last-child) { display: none !important; }
   .hero__log-line { opacity: 1 !important; }
-  .btn { box-shadow: inset 0 0 0 1.5px rgba(43,57,232,.6) !important; }
+  .btn { box-shadow: inset 0 0 0 1px rgba(91,196,226,.7) !important; }
 `;
 
 async function shot(page, file, width) {

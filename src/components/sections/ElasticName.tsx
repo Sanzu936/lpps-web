@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useId, useRef } from "react";
 import { useMotion } from "@/lib/motion";
 import { hasFinePointer } from "@/lib/env";
 
@@ -10,6 +10,7 @@ import { hasFinePointer } from "@/lib/env";
  */
 export default function ElasticName({ name, accent }: { name: string; accent?: boolean }) {
   const svg = useRef<SVGSVGElement>(null);
+  const gid = useId().replace(/:/g, "");
   const letters = Array.from(name);
 
   useMotion(
@@ -17,7 +18,7 @@ export default function ElasticName({ name, accent }: { name: string; accent?: b
       const el = svg.current!;
       const spans = Array.from(el.querySelectorAll<SVGTSpanElement>("tspan"));
       const n = spans.length;
-      const state = spans.map(() => ({ w: 62, g: 760 }));
+      const state = spans.map(() => ({ w: 78, g: 260 }));
       const apply = () =>
         spans.forEach((s, i) => {
           s.style.fontVariationSettings = `"wdth" ${state[i].w.toFixed(1)}, "wght" ${state[i].g.toFixed(0)}`;
@@ -29,8 +30,8 @@ export default function ElasticName({ name, accent }: { name: string; accent?: b
           const c = (i + 0.5) / n;
           const f = Math.exp(-Math.pow((c - pos) * 3.2, 2)) * amount;
           gsap.to(state[i], {
-            w: 62 + f * 88,
-            g: 760 + f * 140,
+            w: 78 + f * 70,
+            g: 260 + f * 420,
             duration: 0.7,
             ease: "power3.out",
             overwrite: true,
@@ -73,7 +74,16 @@ export default function ElasticName({ name, accent }: { name: string; accent?: b
 
   return (
     <svg ref={svg} className={`elastic ${accent ? "elastic--accent" : ""}`} viewBox="0 0 1000 250" aria-hidden="true" focusable="false">
-      <text x="0" y="214" fontSize="272">
+      <defs>
+        <linearGradient id={`chrome-${gid}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="0.42" stopColor={accent ? "#bfe9f7" : "#dfe6f2"} />
+          <stop offset="0.5" stopColor={accent ? "#5bc4e2" : "#8794b0"} />
+          <stop offset="0.62" stopColor={accent ? "#9fdcef" : "#e9eef7"} />
+          <stop offset="1" stopColor={accent ? "#20508e" : "#a9b4c9"} />
+        </linearGradient>
+      </defs>
+      <text x="0" y="214" fontSize="262" fill={`url(#chrome-${gid})`}>
         {letters.map((l, i) => (
           <tspan key={i}>{l}</tspan>
         ))}

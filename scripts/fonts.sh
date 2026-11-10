@@ -9,7 +9,7 @@ pyftsubset node_modules/@fontsource-variable/schibsted-grotesk/files/schibsted-g
 python3 - <<'PY'
 from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
-for name, limits in [("anybody", {"wght": (750, 900), "wdth": (60, 150)}), ("schibsted", {"wght": (400, 700)})]:
+for name, limits in [("anybody", {"wght": (200, 900), "wdth": (60, 150)}), ("schibsted", {"wght": (400, 700)})]:
     f = TTFont(f"src/fonts/{name}.woff2")
     axes = {a.axisTag: a for a in f["fvar"].axes}
     trip = {k: instancer.AxisTriple(lo, min(max(lo, axes[k].defaultValue), hi), hi) for k, (lo, hi) in limits.items()}

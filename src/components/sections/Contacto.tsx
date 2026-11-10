@@ -4,6 +4,7 @@ import { useMotion } from "@/lib/motion";
 import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import RevealTitle from "../RevealTitle";
 import Magnetic from "../Magnetic";
+import FoxBuild from "./FoxBuild";
 
 /**
  * Cierre. El teléfono aparece en un panel de aeropuerto: cada cifra gira
@@ -47,7 +48,8 @@ export default function Contacto() {
 
   return (
     <section ref={root} id="contacto" className="section contacto" data-theme="dark" aria-labelledby="contacto-title">
-      <div className="wrap">
+      <div className="wrap contacto__grid">
+        <div>
         <RevealTitle id="contacto-title" className="contacto__title" lines={["¿Hablamos de", "tu web?"]} />
         <p className="contacto__lede">
           Llámanos o escríbenos. Te contamos cómo sería tu web y, si te encaja, te la enseñamos hecha antes de que pagues nada.
@@ -77,6 +79,8 @@ export default function Contacto() {
           </a>
         </div>
         <p className="contacto__hours">Si no lo cogemos al momento, te devolvemos la llamada.</p>
+        </div>
+        <FoxBuild />
       </div>
     </section>
   );

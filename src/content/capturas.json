@@ -7,7 +7,7 @@
   "escritorio": {
     "src": "/trabajos/lpps-escritorio",
     "width": 1000,
-    "height": 6488
+    "height": 6587
   },
   "plano": {
     "src": "/trabajos/lpps-plano",
@@ -17,6 +17,6 @@
   "movil": {
     "src": "/trabajos/lpps-movil",
     "width": 390,
-    "height": 8095
+    "height": 8748
   }
 }

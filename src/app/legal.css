@@ -1,5 +1,5 @@
 .legal {
-  background: var(--paper);
+  background: var(--abyss);
   padding: calc(var(--header-h) + clamp(2.5rem, 7vw, 5rem)) 0 clamp(4rem, 9vw, 7rem);
   min-height: 80vh;
 }
@@ -20,7 +20,7 @@
 }
 .legal__title {
   font-size: clamp(2.6rem, 8vw, 5.4rem);
-  font-stretch: 86%;
+  font-stretch: 108%;
   margin: 1rem 0 0.75rem;
 }
 .legal__updated {
@@ -29,7 +29,7 @@
 }
 .legal__body h2 {
   font-size: clamp(1.5rem, 3vw, 2rem);
-  font-stretch: 90%;
+  font-stretch: 108%;
   line-height: 1.1;
   margin: 2.75rem 0 1rem;
 }
@@ -63,11 +63,11 @@
   text-align: left;
   vertical-align: top;
   padding: 0.75rem 0.75rem 0.75rem 0;
-  border-bottom: 1px solid rgba(20, 21, 43, 0.15);
+  border-bottom: 1px solid rgba(170, 205, 245, 0.15);
 }
 .legal__body th {
   width: 34%;
-  color: var(--graphite);
+  color: var(--pearl);
 }
 .pendiente {
   padding: 0.05em 0.4em;

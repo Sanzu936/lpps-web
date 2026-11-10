@@ -208,7 +208,7 @@ export default function ComoFunciona() {
           .timeline({ scrollTrigger: st(p3) })
           .from(p3.querySelector(".tweak-card"), { y: 30, autoAlpha: 0, duration: 0.3 })
           .fromTo(p3.querySelector(".tw-cursor"), { x: 160, y: 120 }, { x: 0, y: 0, duration: 0.35 }, 0.15)
-          .to(p3.querySelector(".tweak-card"), { "--accent": "#ffd21f", "--accent-ink": "#1a1500", duration: 0.05 }, 0.5)
+          .to(p3.querySelector(".tweak-card"), { "--accent": "#20508e", "--accent-ink": "#ffffff", duration: 0.05 }, 0.5)
           .to(p3.querySelector(".sw--2"), { scale: 1.25, duration: 0.08, yoyo: true, repeat: 1 }, 0.48)
           .from(p3.querySelector(".round--1"), { scale: 0, duration: 0.15 }, 0.5)
           .to(p3.querySelector(".tw-cursor"), { x: -150, y: -96, duration: 0.3 }, 0.62)

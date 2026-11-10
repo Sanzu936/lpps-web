@@ -59,10 +59,11 @@ export default function HeroController() {
         if (hint) tl.to(hint, { autoAlpha: 0, duration: 0.12 }, 0);
         tl.fromTo(
           tiles,
-          { rotationX: -92, transformPerspective: 650, "--s": 0.7 },
+          { rotationX: -92, transformPerspective: 650, "--s": 0.85, "--g": 1 },
           {
             rotationX: 0,
             "--s": 0,
+            "--g": 0.12,
             duration: 0.24,
             ease: "power2.out",
             stagger: { grid, from: "center", amount: 0.42 },

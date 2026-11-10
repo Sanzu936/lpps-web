@@ -33,6 +33,7 @@ export default function RevealTitle({
             ease: "expo.out",
             stagger: 0.09,
             scrollTrigger: { trigger: ref.current, start: "top 86%", once: true },
+            onComplete: () => ref.current?.querySelectorAll(".sheen").forEach((el) => el.classList.add("is-lit")),
           }
         );
       });
@@ -43,7 +44,7 @@ export default function RevealTitle({
     <Tag ref={ref} className={className} id={id}>
       {lines.map((l, i) => (
         <span className="reveal-line" key={i}>
-          <span>{l}</span>
+          <span className="sheen">{l}</span>
         </span>
       ))}
     </Tag>

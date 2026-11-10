@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { heroState } from "./heroState";
+import LensPass from "./LensPass";
 
 const vertexShader = /* glsl */ `
   attribute vec3 aInfo; // x: columna 0-1, y: fila 0-1, z: aleatorio
@@ -70,12 +71,14 @@ const fragmentShader = /* glsl */ `
     float diff = clamp(dot(normalize(vNormal), light), 0.0, 1.0);
     vec3 face = uFace * (0.55 + diff * 0.65);
     float hot = smoothstep(0.35, 0.9, vLift);
-    face = mix(face, uSignal * (0.7 + 0.3 * diff), hot * top);
+    face = mix(face, mix(uLine, uSignal, 0.45) * (0.62 + 0.38 * diff), hot * top);
     face = mix(uBg, face, uFill);
 
     vec3 lineCol = mix(uLine, uSignal, hot);
-    float lineAmt = line * mix(0.55, 0.9, top) * (0.55 + 0.45 * (1.0 - uFill) + hot);
+    float lineAmt = line * mix(0.45, 0.85, top) * (0.5 + 0.5 * (1.0 - uFill) + hot);
     vec3 col = mix(face, lineCol, clamp(lineAmt, 0.0, 1.0));
+    // halo celeste en las baldosas levantadas
+    col += uLine * hot * 0.22 + uSignal * hot * top * 0.12;
 
     // niebla hacia el fondo
     float fog = smoothstep(9.0, 26.0, vDepth);
@@ -123,10 +126,10 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
           uPress: { value: 0 },
           uFlat: { value: 0 },
           uPointer: { value: new THREE.Vector2(6, 2) },
-          uBg: { value: new THREE.Color("#0c0e2b") },
-          uFace: { value: new THREE.Color("#1d2260") },
-          uLine: { value: new THREE.Color("#8fa4ff") },
-          uSignal: { value: new THREE.Color("#ffd21f") },
+          uBg: { value: new THREE.Color("#03050b") },
+          uFace: { value: new THREE.Color("#122a55") },
+          uLine: { value: new THREE.Color("#5bc4e2") },
+          uSignal: { value: new THREE.Color("#bfe9f7") },
         },
       }),
     [reduce]
@@ -214,6 +217,8 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       target = pointer.current.ndc;
     }
     ray.setFromCamera(target, camera);
+    heroState.lens.x = target.x * 0.5 + 0.5;
+    heroState.lens.y = target.y * 0.5 + 0.5;
     if (ray.ray.intersectPlane(plane, hit)) {
       const k = 1 - Math.pow(0.0015, dt);
       u.uPointer.value.x += (hit.x - u.uPointer.value.x) * k;
@@ -266,9 +271,10 @@ export default function TileField({ onReady, lite = false }: Props) {
       dpr={lite ? 0.75 : mobile ? [1, 1.25] : [1, 1.75]}
       gl={{ antialias: !mobile, alpha: false, powerPreference: "high-performance" }}
       camera={{ position: mobile ? [0, -13, 14] : [2, -12, 10.5], fov: mobile ? 52 : 42, near: 0.1, far: 80 }}
-      onCreated={({ gl }) => gl.setClearColor("#0c0e2b")}
+      onCreated={({ gl }) => gl.setClearColor("#03050b")}
     >
       <Field cols={cols} rows={rows} mobile={mobile} lite={lite} onReady={onReady} />
+      <LensPass radius={mobile ? 78 : 124} />
       {lite ? null : <Pauser />}
     </Canvas>
   );
