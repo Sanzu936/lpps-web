@@ -14,12 +14,14 @@ for (let i = 0; i < S * S; i++) {
 }
 await sharp(buf, { raw: { width: S, height: S, channels: 4 } }).png({ compressionLevel: 9, palette: true, colors: 12 }).toFile("src/assets/grain.png");
 
-const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0c0e2b"/>
-  <rect x="14" y="14" width="16" height="16" rx="3" fill="#eef0f4"/>
-  <rect x="34" y="14" width="16" height="16" rx="3" fill="#ffd21f"/>
-  <rect x="14" y="34" width="16" height="16" rx="3" fill="#eef0f4"/>
-  <rect x="34" y="34" width="16" height="16" rx="3" fill="#eef0f4"/>
+import fox from "../src/components/fox-paths.json" with { type: "json" };
+const [vx, vy, vw, vh] = fox.viewBox.split(" ").map(Number);
+const side = Math.max(vw, vh) * 1.18;
+const ox = vx - (side - vw) / 2;
+const oy = vy - (side - vh) / 2;
+const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${ox.toFixed(1)} ${oy.toFixed(1)} ${side.toFixed(1)} ${side.toFixed(1)}">
+  <rect x="${ox.toFixed(1)}" y="${oy.toFixed(1)}" width="${side.toFixed(1)}" height="${side.toFixed(1)}" rx="${(side * 0.22).toFixed(1)}" fill="#03050b"/>
+  <path d="${fox.white}" fill="#edf2fa"/><path d="${fox.navy}" fill="#20508e"/><path d="${fox.sky}" fill="#5bc4e2"/>
 </svg>`;
 writeFileSync("src/app/icon.svg", icon);
 await sharp(Buffer.from(icon)).resize(180, 180).png().toFile("src/app/apple-icon.png");
