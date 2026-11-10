@@ -82,6 +82,12 @@ body {
   overflow-x: clip;
 }
 
+@media (min-width: 1600px) {
+  body {
+    font-size: 1.15rem;
+  }
+}
+
 img,
 svg,
 video,
@@ -891,6 +897,7 @@ main {
     animation: none;
   }
   .sheen {
-    background-position: 50% 0;
+    background: none;
+    color: var(--pearl);
   }
 }

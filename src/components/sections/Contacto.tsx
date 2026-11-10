@@ -55,10 +55,12 @@ export default function Contacto() {
           Llámanos o escríbenos. Te contamos cómo sería tu web y, si te encaja, te la enseñamos hecha antes de que pagues nada.
         </p>
 
-        <a className="board" href={PHONE_HREF} aria-label={`Llamar al ${PHONE_DISPLAY.replace(/ /g, "")}`} data-cursor="Llamar">
+        <a className="board" href={PHONE_HREF} aria-label={`Llamar al ${PHONE_DISPLAY}`} data-cursor="Llamar">
           {chars.map((c, i) =>
             c === " " ? (
-              <span className="flap flap--gap" key={i} aria-hidden="true" />
+              <span className="flap flap--gap" key={i} aria-hidden="true">
+                {" "}
+              </span>
             ) : (
               <span className="flap" data-digit={c} key={i} aria-hidden="true">
                 <span className="flap__face">{c}</span>

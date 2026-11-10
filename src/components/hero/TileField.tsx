@@ -211,7 +211,7 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
     const idle = performance.now() - pointer.current.last > 2600;
     let target: THREE.Vector2;
     if (idle || reduce) {
-      auto.set(Math.sin(t * 0.37) * 0.75 + 0.15, Math.cos(t * 0.29) * 0.45 + (mobile ? -0.1 : 0.15));
+      auto.set(Math.sin(t * 0.37) * (window.innerWidth < window.innerHeight ? 0.45 : 0.75) + (window.innerWidth < window.innerHeight ? 0.05 : 0.15), Math.cos(t * 0.29) * 0.45 + (mobile ? -0.1 : 0.15));
       target = auto;
     } else {
       target = pointer.current.ndc;

@@ -17,7 +17,11 @@ const PLANO_CSS = `
   .hero__grid { display: block !important; opacity: 1 !important;
     background-image: repeating-linear-gradient(90deg, rgba(91,196,226,.16) 0 1px, transparent 1px calc((100% - 2 * var(--gutter)) / 12)),
       repeating-linear-gradient(0deg, rgba(91,196,226,.1) 0 1px, transparent 1px 64px) !important; }
-  h1, p, .btn, .logo, .nav a, .header-call { outline: 1px dashed rgba(91,196,226,.75) !important; outline-offset: 6px; }
+  h1, h2, h3, p, li, .btn, .logo, .nav a, .header-call, .elastic, .signature { outline: 1px dashed rgba(91,196,226,.75) !important; outline-offset: 6px; }
+  .reveal-line > span, .partner__text, .partner__role, .partner__tasks li, .lede, .direct__lead, .direct__number {
+    background-image: linear-gradient(rgba(91,196,226,.22), rgba(91,196,226,.22)) !important; background-repeat: no-repeat !important;
+    background-size: 100% 0.62em !important; background-position: 0 58% !important; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .elastic text { fill: transparent !important; stroke: rgba(91,196,226,.6) !important; stroke-width: 1.5px; }
   .hero__ch, .hero__sub-text, .hero__note-text, .nav a, .btn__label, .logo span, .hero__log-line {
     background-image: linear-gradient(rgba(91,196,226,.22), rgba(91,196,226,.22)) !important; background-repeat: no-repeat !important;
     background-size: 100% 0.62em !important; background-position: 0 58% !important; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
@@ -51,12 +55,18 @@ async function open(viewport, mobile) {
 }
 
 let page = await open({ width: 1440, height: 900 }, false);
-res.final = await shot(page, "lpps-final", 1440);
+const toNosotros = () =>
+  page.evaluate(() => window.scrollTo(0, document.getElementById("nosotros").getBoundingClientRect().top + scrollY - 40));
 // Imagen Open Graph (1200×630) a partir del hero
 await sharp(await page.screenshot()).resize(1200, 630, { fit: "cover", position: "top" }).jpeg({ quality: 82, mozjpeg: true }).toFile("public/og.jpg");
 res.escritorio = await shot(page, "lpps-escritorio", 1000);
+await page.addStyleTag({ content: ".site-header{display:none!important}" });
+// antes / después: la sección "Quiénes somos" terminada y en fase de plano
+await toNosotros();
+await page.waitForTimeout(900);
+res.final = await shot(page, "lpps-final", 1440);
 await page.addStyleTag({ content: PLANO_CSS });
-await page.evaluate(() => window.scrollTo(0, 0));
+await toNosotros();
 await page.waitForTimeout(400);
 res.plano = await shot(page, "lpps-plano", 1440);
 await page.context().close();

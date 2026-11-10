@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BOOKING_HREF, BOOKING_IS_EXTERNAL } from "@/config/site";
+import { BOOKING_HREF, BOOKING_IS_EXTERNAL, withBase } from "@/config/site";
 import Magnetic from "./Magnetic";
 
 type Props = {
@@ -12,9 +12,11 @@ type Props = {
 
 /** Botón "Agendar llamada". Su destino sale siempre de BOOKING_HREF (src/config/site.ts). */
 export default function BookingLink({ children = "Agendar llamada", className = "btn", magnetic = false, radius }: Props) {
+  // Un ancla (#contacto) se resuelve contra la portada, para que funcione también desde las legales
+  const href = BOOKING_HREF.startsWith("#") ? withBase(`/${BOOKING_HREF}`) : BOOKING_HREF;
   const link = (
     <a
-      href={BOOKING_HREF}
+      href={href}
       className={className}
       {...(BOOKING_IS_EXTERNAL ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >

@@ -51,7 +51,7 @@
     gap: clamp(3rem, 6vw, 6rem);
   }
   .partner--lori {
-    margin-top: clamp(6rem, 14vw, 12rem);
+    margin-top: clamp(3rem, 6vw, 5.5rem);
   }
 }
 .partner {
@@ -1154,7 +1154,7 @@
 }
 .ba__chip {
   position: absolute;
-  top: 1rem;
+  bottom: 1rem;
   z-index: 2;
   padding: 0.35rem 0.8rem;
   border-radius: 99px;
@@ -1459,8 +1459,8 @@
   left: 0;
   right: 0;
   top: 50%;
-  height: 1.5px;
-  background: rgba(12, 14, 43, 0.9);
+  height: 1px;
+  background: rgba(3, 5, 11, 0.55);
 }
 .flap--gap {
   width: clamp(0.4rem, 1.6vw, 1.4rem);

@@ -11,6 +11,7 @@ for (const [name, vp, mobile, width] of [
 ]) {
   const ctx = await browser.newContext({ viewport: vp, isMobile: mobile, hasTouch: mobile, deviceScaleFactor: mobile ? 2 : 1 });
   const page = await ctx.newPage();
+  await page.addInitScript(() => { window.__lppsPoster = true; });
   await page.goto(BASE + "/", { waitUntil: "load" });
   await page.waitForTimeout(1200);
   // un gesto pone en marcha el 3D; luego se deja que el foco recorra solo la rejilla

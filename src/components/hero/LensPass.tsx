@@ -139,7 +139,9 @@ export default function LensPass({ radius = 120 }: { radius?: number }) {
     u.uVel.value.y += (vy * 0.12 * (u.uRes.value.y / u.uRes.value.x) - u.uVel.value.y) * 0.2;
     prev.set(cx, cy);
     // aparece tras la entrada y se desvanece con la transición a la siguiente sección
-    const target = Math.max(0, 1 - heroState.progress * 2.2);
+    // (el póster estático del hero se genera sin lente: scripts/poster.mjs activa __lppsPoster)
+    const noLens = (window as Window & { __lppsPoster?: boolean }).__lppsPoster === true;
+    const target = noLens ? 0 : Math.max(0, 1 - heroState.progress * 2.2);
     u.uAmt.value += (target * Math.min(1, state.clock.elapsedTime / 1.6) - u.uAmt.value) * 0.08;
 
     state.gl.setRenderTarget(rt);

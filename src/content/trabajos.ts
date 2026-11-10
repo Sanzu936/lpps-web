@@ -56,8 +56,8 @@ export const TRABAJOS: Trabajo[] = [
 export const ANTES_DESPUES: AntesDespues = {
   nombre: "Del plano a la web terminada",
   descripcion:
-    "Así era esta página antes de aplicar el diseño: solo estructura en líneas. Arrastra para ver la diferencia que marca el diseño.",
+    "Así era la sección «Quiénes somos» de esta web antes de aplicar el diseño: solo estructura en líneas. Arrastra para ver la diferencia.",
   muestra: false,
-  antes: { ...capturas.plano, etiqueta: "Antes", alt: "La web de LPPS en fase de plano: estructura en líneas, sin color ni tipografía." },
-  despues: { ...capturas.final, etiqueta: "Después", alt: "La web de LPPS terminada: hero oscuro con titular grande y escena 3D." },
+  antes: { ...capturas.plano, etiqueta: "Antes", alt: "La sección Quiénes somos de LPPS en fase de plano: estructura en líneas, sin color ni tipografía." },
+  despues: { ...capturas.final, etiqueta: "Después", alt: "La sección Quiénes somos terminada: nombres de Pablo y Lori en tipografía grande y sus firmas." },
 };

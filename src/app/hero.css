@@ -609,3 +609,10 @@ html.grain-on .hero__bg::after {
     margin-top: -76svh;
   }
 }
+
+/* Tablet en vertical: el bloque de texto se centra para no dejar media pantalla vacía arriba */
+@media (min-width: 600px) and (max-width: 1099px) and (orientation: portrait) {
+  .hero__content {
+    justify-content: center;
+  }
+}
