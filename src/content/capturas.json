@@ -1,0 +1,22 @@
+{
+  "final": {
+    "src": "/trabajos/lpps-final",
+    "width": 1440,
+    "height": 900
+  },
+  "escritorio": {
+    "src": "/trabajos/lpps-escritorio",
+    "width": 1000,
+    "height": 6488
+  },
+  "plano": {
+    "src": "/trabajos/lpps-plano",
+    "width": 1440,
+    "height": 900
+  },
+  "movil": {
+    "src": "/trabajos/lpps-movil",
+    "width": 390,
+    "height": 8095
+  }
+}
