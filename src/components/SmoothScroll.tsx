@@ -36,10 +36,9 @@ export default function SmoothScroll() {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const a = (e.target as HTMLElement | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
       if (!a) return;
-      const href = a.getAttribute("href") || "";
-      let hash = "";
-      if (href.startsWith("#")) hash = href;
-      else if (href.startsWith("/#") && location.pathname === "/") hash = href.slice(1);
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+      const hash = url.hash;
       if (!hash || hash === "#") return;
       if (scrollToHash(hash)) e.preventDefault();
     };

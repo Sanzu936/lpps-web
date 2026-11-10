@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { PHONE_HREF, PHONE_DISPLAY } from "@/config/site";
+import { PHONE_HREF, PHONE_DISPLAY, withBase } from "@/config/site";
 import BookingLink from "./BookingLink";
 
 const LINKS = [
@@ -13,7 +13,7 @@ const LINKS = [
 
 export function Logo() {
   return (
-    <a href="/#inicio" className="logo" aria-label="LPPS, ir al inicio">
+    <a href={withBase("/#inicio")} className="logo" aria-label="LPPS, ir al inicio">
       <span className="logo__mark" aria-hidden="true">
         <span />
         <span />
@@ -61,7 +61,7 @@ export default function Header({ initialTheme = "dark" }: { initialTheme?: "dark
           <ul className="nav">
             {LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
+                <a href={withBase(l.href)}>{l.label}</a>
               </li>
             ))}
           </ul>

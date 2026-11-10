@@ -2,14 +2,15 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useMotion } from "@/lib/motion";
 import { TRABAJOS, ANTES_DESPUES, type Captura } from "@/content/trabajos";
+import { withBase } from "@/config/site";
 import RevealTitle from "../RevealTitle";
 
 function Pic({ c, alt, sizes, eager = false }: { c: Captura; alt: string; sizes: string; eager?: boolean }) {
   return (
     <picture>
-      <source type="image/avif" srcSet={`${c.src}.avif`} sizes={sizes} />
+      <source type="image/avif" srcSet={withBase(`${c.src}.avif`)} sizes={sizes} />
       <img
-        src={`${c.src}.webp`}
+        src={withBase(`${c.src}.webp`)}
         alt={alt}
         width={c.width}
         height={c.height}

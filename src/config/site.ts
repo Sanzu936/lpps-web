@@ -5,6 +5,11 @@
  */
 export const BOOKING_HREF = "#contacto";
 
+/** Ruta base si la web se publica en una subcarpeta (ver next.config.mjs). Vacía en la raíz. */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+/** Antepone la ruta base a una ruta interna absoluta ("/aviso-legal/" → "/demo/aviso-legal/"). */
+export const withBase = (path: string) => `${BASE_PATH}${path}`;
+
 /** true si BOOKING_HREF apunta a otra web (abre en pestaña nueva). */
 export const BOOKING_IS_EXTERNAL = /^https?:\/\//.test(BOOKING_HREF);
 

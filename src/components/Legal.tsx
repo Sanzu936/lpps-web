@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { withBase } from "@/config/site";
 
 /**
  * Campo pendiente de rellenar por el titular. Búscalo en el código por "Pendiente".
@@ -16,7 +17,7 @@ export function LegalPage({ title, updated, children }: { title: string; updated
       <Header initialTheme="light" />
       <main id="contenido" tabIndex={-1} className="legal on-light" data-theme="light">
         <div className="wrap legal__wrap">
-          <a className="legal__back" href="/">
+          <a className="legal__back" href={withBase("/")}>
             <span aria-hidden="true">←</span> Volver a la web
           </a>
           <h1 className="legal__title">{title}</h1>

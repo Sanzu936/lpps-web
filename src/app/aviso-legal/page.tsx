@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage, Titular } from "@/components/Legal";
+import { withBase } from "@/config/site";
 import "../legal.css";
 
 export const metadata: Metadata = {
@@ -63,8 +64,8 @@ export default function AvisoLegal() {
 
       <h2>7. Protección de datos y cookies</h2>
       <p>
-        El tratamiento de tus datos personales se explica en la <a href="/privacidad/">política de privacidad</a>. Esta web no
-        utiliza cookies; los detalles están en la <a href="/cookies/">política de cookies</a>.
+        El tratamiento de tus datos personales se explica en la <a href={withBase("/privacidad/")}>política de privacidad</a>. Esta web no
+        utiliza cookies; los detalles están en la <a href={withBase("/cookies/")}>política de cookies</a>.
       </p>
 
       <h2>8. Legislación aplicable y jurisdicción</h2>

@@ -20,6 +20,16 @@ npm start          # (opcional) sirve out/ en http://localhost:3000 para revisar
 
 Sube **el contenido de la carpeta `out/`** a la raíz pública de tu hosting (`public_html`, `www`, etc.) por FTP o desde el gestor de archivos. No necesita Node ni base de datos. Cada página va en su carpeta con `index.html` (`/aviso-legal/`, `/privacidad/`, `/cookies/`), así que funciona en cualquier servidor (Apache, Nginx, Netlify, Vercel, Cloudflare Pages…).
 
+### Publicar en una subcarpeta (por ejemplo, como demo)
+
+Si la web no va en la raíz del dominio sino en una subcarpeta (`https://dominio/abc123/`), compílala indicando esa ruta:
+
+```bash
+BASE_PATH=/abc123 npm run build
+```
+
+y sube el contenido de `out/` a esa subcarpeta. Sin `BASE_PATH`, la web va en la raíz (lppstech.com).
+
 ## Cambiar el destino de «Agendar llamada»
 
 Todos los botones «Agendar llamada» usan una sola constante en **`src/config/site.ts`**:

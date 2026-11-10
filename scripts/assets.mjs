@@ -12,7 +12,7 @@ for (let i = 0; i < S * S; i++) {
   buf[i * 4 + 2] = v;
   buf[i * 4 + 3] = 90 + Math.random() * 120;
 }
-await sharp(buf, { raw: { width: S, height: S, channels: 4 } }).png({ compressionLevel: 9, palette: true, colors: 12 }).toFile("public/grain.png");
+await sharp(buf, { raw: { width: S, height: S, channels: 4 } }).png({ compressionLevel: 9, palette: true, colors: 12 }).toFile("src/assets/grain.png");
 
 const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#0c0e2b"/>
