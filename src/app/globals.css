@@ -352,7 +352,8 @@ p {
 }
 .site-header__bar {
   position: absolute;
-  inset: 10px var(--gutter) auto;
+  /* mismo ancho que el contenido (.wrap) para que el cristal no quede descuadrado en pantallas grandes */
+  inset: 10px max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter) - 0.9rem)) auto;
   height: calc(var(--header-h) - 20px);
   border-radius: 999px;
   opacity: 0;
@@ -705,6 +706,11 @@ html.menu-open body {
     width: 66px;
     height: 66px;
     margin: -33px 0 0 -33px;
+    /* sobre un enlace no se deforma ni desenfoca lo que hay debajo: solo un halo */
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: inset 0 0 0 1px rgba(191, 233, 247, 0.55), 0 0 18px rgba(91, 196, 226, 0.25);
   }
   .cursor[data-state="label"] .cursor__ring {
     width: 96px;
@@ -903,5 +909,26 @@ main {
   .sheen {
     background: none;
     color: var(--pearl);
+  }
+}
+
+/* Móvil y táctil: el cristal conserva desenfoque y saturación, pero sin la refracción por
+   filtro SVG (cara de componer en GPUs modestas) y con menos radio en las cintas. */
+@media (pointer: coarse), (max-width: 759px) {
+  .glass.glass--liquid {
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+    backdrop-filter: blur(16px) saturate(170%);
+  }
+  .tape {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(13, 22, 48, 0.88);
+  }
+  .tape--ink {
+    background: var(--sky);
+  }
+  .guarantee {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }

@@ -1135,19 +1135,26 @@
   clip-path: inset(0 0 0 var(--pos));
 }
 .ba__handle {
+  /* capa del ancho del deslizador que se desplaza con transform (sin recalcular diseño) */
+  position: absolute;
+  inset: 0;
+  transform: translateX(var(--pos));
+  pointer-events: none;
+  will-change: transform;
+}
+.ba__handle::before {
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--pos);
+  left: -1px;
   width: 2px;
-  margin-left: -1px;
   background: var(--signal);
-  box-shadow: 0 0 0 1px rgba(20, 21, 43, 0.4);
-  pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(3, 5, 11, 0.4), 0 0 14px rgba(91, 196, 226, 0.6);
 }
 .ba__knob {
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
   display: grid;
   place-items: center;

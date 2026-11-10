@@ -160,7 +160,9 @@ export default function ComoFunciona() {
         const distance = () => track.scrollWidth - window.innerWidth;
         // La sección se fija con position: sticky (sin cambio a position: fixed, que el
         // navegador cuenta como salto de diseño): su altura reserva el recorrido horizontal.
-        const setRun = () => section.style.setProperty("--hrun", `${Math.max(0, distance())}px`);
+        // en móvil el recorrido de scroll se alarga para que cada paso dure lo suficiente
+        const runFactor = () => (window.innerWidth < 760 ? 1.9 : 1);
+        const setRun = () => section.style.setProperty("--hrun", `${Math.round(Math.max(0, distance()) * runFactor())}px`);
         setRun();
         ScrollTrigger.addEventListener("refreshInit", setRun);
         const tween = gsap.to(track, {
