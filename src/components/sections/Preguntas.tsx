@@ -127,7 +127,7 @@ export default function Preguntas() {
   );
 
   return (
-    <section ref={root} id="preguntas" className="section faq on-light" data-theme="light" aria-labelledby="faq-title">
+    <section ref={root} id="preguntas" className="section faq" aria-labelledby="faq-title">
       <div className="wrap faq__grid">
         <div className="faq__side">
           <RevealTitle id="faq-title" lines={["Lo que", "nos suelen", "preguntar."]} />
@@ -160,7 +160,7 @@ export default function Preguntas() {
       <div className="wrap">
         <ul className="guarantees" aria-label="Garantías">
           {GUARANTEES.map((g) => (
-            <li className="guarantee" key={g.t}>
+            <li className="guarantee glass glass--liquid" key={g.t}>
               <strong>{g.t}</strong>
               <span>{g.d}</span>
             </li>

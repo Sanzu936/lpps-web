@@ -65,7 +65,7 @@ export default function HeroCanvas() {
         const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
         if (ric) ric(() => boot(false), { timeout: 2000 });
         else boot(false);
-      }, 6500);
+      }, 9000);
     };
     if (document.readyState === "complete") arm();
     else window.addEventListener("load", arm, { once: true });

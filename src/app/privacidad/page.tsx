@@ -91,8 +91,9 @@ export default function Privacidad() {
           <tr>
             <th scope="row">Llamar a negocios para presentarles nuestros servicios</th>
             <td>
-              Interés legítimo en dar a conocer nuestra actividad a otros negocios (art. 6.1.f RGPD). Puedes oponerte en
-              cualquier momento y no volveremos a contactarte.
+              Interés legítimo en dar a conocer nuestra actividad a otros negocios (art. 6.1.f RGPD), dentro de los límites
+              de la Ley 11/2022, General de Telecomunicaciones (ver el apartado siguiente). Puedes oponerte en cualquier
+              momento y no volveremos a contactarte.
             </td>
           </tr>
           <tr>
@@ -103,7 +104,21 @@ export default function Privacidad() {
       </table>
       <p>No tomamos decisiones automatizadas ni elaboramos perfiles con tus datos.</p>
 
-      <h2>4. Cuánto tiempo los conservamos</h2>
+      <h2>4. Llamadas comerciales</h2>
+      <p>
+        Para presentar nuestros servicios llamamos a teléfonos de contacto de empresas y negocios publicados por ellos mismos
+        para recibir llamadas comerciales. Cumplimos el artículo 66.1.b de la Ley 11/2022, de 28 de junio, General de
+        Telecomunicaciones: no hacemos llamadas comerciales a personas físicas, autónomos incluidos, salvo que nos hayan dado
+        su consentimiento previo o exista otra base legal que lo permita.
+      </p>
+      <p>
+        Antes de llamar consultamos la lista de exclusión publicitaria Lista Robinson y no llamamos a quien figura en ella ni a
+        quien nos ha pedido que no le llamemos. En cada llamada nos identificamos, te explicamos para qué te llamamos y te
+        recordamos que puedes oponerte. Si no quieres que volvamos a llamarte, dínoslo en la propia llamada o escríbenos a{" "}
+        <a href="mailto:info@lppstech.com">info@lppstech.com</a>.
+      </p>
+
+      <h2>5. Cuánto tiempo los conservamos</h2>
       <ul>
         <li>
           Si no llegas a contratar, conservamos tus datos de contacto el tiempo necesario para atender tu solicitud y, como
@@ -117,7 +132,7 @@ export default function Privacidad() {
         <li>Los registros técnicos del servidor se conservan durante el tiempo que fija el proveedor de alojamiento.</li>
       </ul>
 
-      <h2>5. Con quién los compartimos</h2>
+      <h2>6. Con quién los compartimos</h2>
       <p>
         No vendemos ni cedemos tus datos. Solo acceden a ellos los proveedores que necesitamos para trabajar (alojamiento de
         la web, correo electrónico y telefonía), como encargados del tratamiento y con contrato conforme al artículo 28 del
@@ -128,7 +143,7 @@ export default function Privacidad() {
         adecuadas, como una decisión de adecuación de la Comisión Europea o las cláusulas contractuales tipo.
       </p>
 
-      <h2>6. Tus derechos</h2>
+      <h2>7. Tus derechos</h2>
       <p>Puedes ejercer en cualquier momento, sin coste, los derechos de:</p>
       <ul>
         <li>acceso a tus datos;</li>
@@ -148,16 +163,16 @@ export default function Privacidad() {
         ).
       </p>
 
-      <h2>7. Seguridad</h2>
+      <h2>8. Seguridad</h2>
       <p>
         Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos frente a pérdidas, accesos no autorizados
         o alteraciones. La web se sirve mediante conexión cifrada (HTTPS).
       </p>
 
-      <h2>8. Menores</h2>
+      <h2>9. Menores</h2>
       <p>Nuestros servicios se dirigen a negocios y profesionales. No tratamos de forma consciente datos de menores de 14 años.</p>
 
-      <h2>9. Cambios en esta política</h2>
+      <h2>10. Cambios en esta política</h2>
       <p>
         Si cambiamos la forma de tratar tus datos, actualizaremos esta página e indicaremos la fecha de la última
         modificación.

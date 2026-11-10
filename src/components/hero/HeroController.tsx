@@ -4,9 +4,9 @@ import { useMotion } from "@/lib/motion";
 import { heroState } from "./heroState";
 
 /**
- * Transición oscuro → claro: el hero queda fijo y, al hacer scroll, una rejilla de
- * baldosas de papel gira una a una desde el centro (como un panel de aeropuerto)
- * mientras el contenido oscuro se aleja. Al terminar, la web ya está en claro.
+ * Transición del hero: el hero queda fijo y, al hacer scroll, una rejilla de baldosas
+ * de cristal azul gira una a una desde el centro (como un panel de aeropuerto),
+ * con un destello en el borde, mientras el contenido se aleja hacia el fondo.
  */
 export default function HeroController() {
   const anchor = useRef<HTMLSpanElement>(null);
@@ -19,7 +19,6 @@ export default function HeroController() {
     const flip = section.querySelector<HTMLElement>(".flip")!;
     const tiles = gsap.utils.toArray<HTMLElement>(".flip__tile", flip);
     const hint = section.querySelector<HTMLElement>(".hero__hint");
-    const header = document.querySelector<HTMLElement>(".site-header");
 
     const mm = gsap.matchMedia();
     mm.add(
@@ -45,7 +44,6 @@ export default function HeroController() {
             onUpdate: (self) => {
               heroState.progress = self.progress;
               flip.classList.toggle("is-active", self.progress > 0.002);
-              if (header && self.isActive) header.dataset.theme = self.progress > 0.5 ? "light" : "dark";
             },
             onLeave: () => {
               heroState.visible = false;
@@ -70,7 +68,7 @@ export default function HeroController() {
           },
           0.04
         );
-        // tramo final: el contenido claro sube por encima del papel ya colocado
+        // tramo final: la sección siguiente sube por encima de las baldosas ya colocadas
         tl.to({}, { duration: 0.3 }, 0.7);
         return () => {
           heroState.progress = 0;

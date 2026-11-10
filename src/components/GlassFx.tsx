@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { hasFinePointer } from "@/lib/env";
+import { whenIdle } from "@/lib/defer";
 
 /**
  * Cristal líquido:
@@ -8,6 +9,8 @@ import { hasFinePointer } from "@/lib/env";
  * - el filtro SVG #liquid-glass deforma lo que hay detrás (refracción) en Chromium.
  */
 export default function GlassFx() {
+  useEffect(() => whenIdle(() => document.documentElement.classList.add("grain-on")), []);
+
   useEffect(() => {
     if (!hasFinePointer()) return;
     let raf = 0;

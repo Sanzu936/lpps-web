@@ -9,10 +9,10 @@ import GlassFx from "@/components/GlassFx";
 const anybody = localFont({
   src: "../fonts/anybody.woff2",
   variable: "--font-anybody",
-  weight: "200 900",
+  weight: "250 700",
   style: "normal",
   display: "swap",
-  declarations: [{ prop: "font-stretch", value: "60% 150%" }],
+  declarations: [{ prop: "font-stretch", value: "75% 150%" }],
   adjustFontFallback: "Arial",
   preload: true,
 });
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "LPPS: una web montándose, del plano en líneas a la versión terminada" }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "LPPS: «Webs que no parecen de plantilla», sobre un campo 3D de baldosas azules" }],
   },
   twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION, images: ["/og.jpg"] },
   robots: { index: true, follow: true },

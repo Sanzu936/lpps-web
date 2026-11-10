@@ -14,8 +14,8 @@ export function Pendiente({ children }: { children: ReactNode }) {
 export function LegalPage({ title, updated, children }: { title: string; updated: string; children: ReactNode }) {
   return (
     <>
-      <Header initialTheme="light" />
-      <main id="contenido" tabIndex={-1} className="legal on-light" data-theme="light">
+      <Header />
+      <main id="contenido" tabIndex={-1} className="legal">
         <div className="wrap legal__wrap">
           <a className="legal__back" href={withBase("/")}>
             <span aria-hidden="true">←</span> Volver a la web

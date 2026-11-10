@@ -199,7 +199,7 @@ export default function Trabajos() {
   );
 
   return (
-    <section ref={root} id="trabajos" className="section trabajos on-light" data-theme="light" aria-labelledby="trabajos-title">
+    <section ref={root} id="trabajos" className="section trabajos" aria-labelledby="trabajos-title">
       <div className="wrap">
         <div className="trabajos__head">
           <RevealTitle id="trabajos-title" lines={["La mejor muestra", "es esta web."]} />

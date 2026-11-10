@@ -206,7 +206,7 @@ p {
     inset 1px 0 0 rgba(255, 255, 255, 0.08), inset -1px 0 0 rgba(255, 255, 255, 0.05), 0 24px 60px -28px rgba(0, 0, 0, 0.8);
 }
 @supports (backdrop-filter: url(#x)) {
-  .glass--liquid {
+  .glass.glass--liquid {
     backdrop-filter: url(#liquid-glass) blur(10px) saturate(180%);
   }
 }
@@ -477,6 +477,153 @@ p {
   }
 }
 
+/* Menú móvil */
+.menu-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms var(--ease-out);
+}
+.menu-toggle:active {
+  transform: scale(0.94);
+}
+.menu-toggle__bars {
+  position: relative;
+  width: 18px;
+  height: 10px;
+}
+.menu-toggle__bars span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 450ms var(--ease-expo), top 450ms var(--ease-expo);
+}
+.menu-toggle__bars span:first-child {
+  top: 0;
+}
+.menu-toggle__bars span:last-child {
+  top: 8.5px;
+}
+.site-header[data-menu="open"] .menu-toggle__bars span:first-child {
+  top: 4.25px;
+  transform: rotate(45deg);
+}
+.site-header[data-menu="open"] .menu-toggle__bars span:last-child {
+  top: 4.25px;
+  transform: rotate(-45deg);
+}
+.menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: calc(var(--header-h) + 2.5rem) var(--gutter) calc(2rem + env(safe-area-inset-bottom));
+  pointer-events: auto;
+  background: rgba(3, 5, 11, 0.86);
+  -webkit-backdrop-filter: blur(26px) saturate(170%);
+  backdrop-filter: blur(26px) saturate(170%);
+  overflow-y: auto;
+  animation: menu-in 500ms var(--ease-expo) both;
+}
+.menu-panel[hidden] {
+  display: none;
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    clip-path: circle(0% at calc(100% - 2.5rem) 2.2rem);
+  }
+  to {
+    opacity: 1;
+    clip-path: circle(150% at calc(100% - 2.5rem) 2.2rem);
+  }
+}
+.menu-panel__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.menu-panel__links li {
+  overflow: hidden;
+}
+.menu-panel__links a {
+  display: block;
+  padding: 0.35rem 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-stretch: 112%;
+  font-size: clamp(2.2rem, 10vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+  animation: menu-link 700ms calc(120ms + var(--i) * 60ms) var(--ease-expo) both;
+}
+.menu-panel__links a:focus-visible {
+  outline-offset: 2px;
+}
+@keyframes menu-link {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+.menu-panel__actions {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+.menu-panel__actions .btn svg {
+  width: 18px;
+  height: 18px;
+}
+.menu-panel__mail {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--mist);
+  text-underline-offset: 5px;
+}
+html.menu-open,
+html.menu-open body {
+  overflow: hidden;
+}
+@media (max-width: 999px) {
+  .header-call {
+    display: none;
+  }
+}
+@media (min-width: 1000px) {
+  .menu-toggle,
+  .menu-panel {
+    display: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-panel,
+  .menu-panel__links a {
+    animation: none;
+  }
+  .menu-toggle__bars span {
+    transition: none;
+  }
+}
+
 /* ==========================================================================
    Cursor de cristal líquido (solo puntero fino)
    ========================================================================== */
@@ -575,9 +722,12 @@ p {
   inset: 0;
   z-index: 90;
   pointer-events: none;
-  background-image: url("../assets/grain.png");
   background-size: 128px 128px;
   opacity: 0.06;
+}
+/* el grano se activa cuando la primera pantalla ya está pintada (no compite con ella) */
+html.grain-on .grain {
+  background-image: url("../assets/grain.png");
 }
 
 /* ==========================================================================

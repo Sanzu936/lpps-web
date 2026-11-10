@@ -33,7 +33,7 @@ function SplitTitle({ text }: { text: string }) {
 
 export default function Hero() {
   return (
-    <section id="inicio" className="hero" data-theme="dark" aria-labelledby="hero-title">
+    <section id="inicio" className="hero" aria-labelledby="hero-title">
       <div className="hero__stage">
         <div className="hero__bg" aria-hidden="true">
           <div className="hero__grid" />

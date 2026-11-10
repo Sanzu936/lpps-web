@@ -168,6 +168,17 @@ export default function ComoFunciona() {
             pin: true,
             scrub: 0.6,
             invalidateOnRefresh: true,
+            // encaja en cada paso al soltar el scroll: nunca quedan dos medios paneles
+            snap: {
+              snapTo: (value) => {
+                const d = distance();
+                const points = panels.map((p) => Math.min(1, Math.max(0, (p.offsetLeft - (window.innerWidth - p.offsetWidth) / 2) / d)));
+                return gsap.utils.snap(points, value);
+              },
+              duration: { min: 0.25, max: 0.6 },
+              delay: 0.08,
+              ease: "power2.inOut",
+            },
             onUpdate: (self) => {
               gsap.set(fill, { scaleX: self.progress });
               marks.forEach((m, i) => m.classList.toggle("is-on", self.progress >= (i + 0.5) / (marks.length + 0.5)));
@@ -240,7 +251,7 @@ export default function ComoFunciona() {
   );
 
   return (
-    <section ref={root} id="como-funciona" className="hsteps on-light" data-theme="light" aria-labelledby="como-title">
+    <section ref={root} id="como-funciona" className="hsteps" aria-labelledby="como-title">
       <div className="hsteps__viewport">
         <ol className="hsteps__track">
           <li className="hstep hstep--intro">

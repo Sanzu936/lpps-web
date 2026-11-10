@@ -3,7 +3,7 @@ import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF, withBase } from "@/config
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="site-footer" data-theme="dark">
+    <footer className="site-footer">
       <div className="wrap site-footer__inner">
         <p>© {year} LPPS. Webs diseñadas y programadas por Pablo y Lori.</p>
         <nav aria-label="Legal y contacto">

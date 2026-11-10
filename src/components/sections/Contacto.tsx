@@ -47,7 +47,7 @@ export default function Contacto() {
   );
 
   return (
-    <section ref={root} id="contacto" className="section contacto" data-theme="dark" aria-labelledby="contacto-title">
+    <section ref={root} id="contacto" className="section contacto" aria-labelledby="contacto-title">
       <div className="wrap contacto__grid">
         <div>
         <RevealTitle id="contacto-title" className="contacto__title" lines={["¿Hablamos de", "tu web?"]} />

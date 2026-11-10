@@ -22,7 +22,7 @@ const PARTNERS = [
 
 export default function Nosotros() {
   return (
-    <section id="nosotros" className="section nosotros on-light" data-theme="light" aria-labelledby="nosotros-title">
+    <section id="nosotros" className="section nosotros" aria-labelledby="nosotros-title">
       <div className="wrap">
         <div className="nosotros__head">
           <RevealTitle id="nosotros-title" lines={["Detrás de esta web", "hay dos personas."]} />
@@ -51,7 +51,7 @@ export default function Nosotros() {
           ))}
         </div>
 
-        <div className="direct">
+        <div className="direct glass glass--liquid">
           <p className="direct__lead">Si llamas a este número, lo coge uno de los dos:</p>
           <a className="direct__phone" href={PHONE_HREF} data-cursor="Llamar">
             <span className="direct__icon" aria-hidden="true">

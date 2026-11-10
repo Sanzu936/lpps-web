@@ -3,7 +3,7 @@
    Secuencia 100 % CSS: se ve antes de que cargue el JavaScript.
    ========================================================================== */
 .hero {
-  --hero-run: 1.1; /* pantallas de scroll que dura la transición a claro (móvil) */
+  --hero-run: 1.1; /* pantallas de scroll que dura la transición (móvil) */
   position: relative;
   background: var(--void);
   color: var(--pearl);
@@ -183,13 +183,13 @@
   --text: var(--mist);
   animation-delay: 1.75s;
 }
+/* El texto está completo desde el primer fotograma (es el LCP en móvil); el "esqueleto"
+   es solo la barra de plano que hay detrás y se recoge cuando entra el contenido. */
 @keyframes hero-text {
   from {
-    color: rgba(156, 168, 196, 0.25);
     background-size: 100% 0.62em;
   }
   to {
-    color: var(--text);
     background-size: 0% 0.62em;
   }
 }
@@ -468,7 +468,7 @@
   }
 }
 
-/* Transición oscuro → claro: baldosas que giran como un panel de aeropuerto */
+/* Transición: baldosas de cristal azul que giran como un panel de aeropuerto */
 .flip {
   position: absolute;
   inset: -1px;
@@ -483,9 +483,10 @@
   --g: 0;
   display: block;
   margin: -0.5px;
-  background: linear-gradient(135deg, rgba(191, 233, 247, calc(var(--g) * 0.5)) 0%, rgba(91, 196, 226, calc(var(--g) * 0.18)) 30%, transparent 55%),
-    linear-gradient(rgba(0, 0, 0, var(--s)), rgba(0, 0, 0, var(--s))), var(--abyss);
-  box-shadow: inset 0 1px 0 rgba(191, 233, 247, calc(var(--g) * 0.6));
+  background: linear-gradient(135deg, rgba(191, 233, 247, calc(var(--g) * 0.65)) 0%, rgba(91, 196, 226, calc(var(--g) * 0.3)) 32%, transparent 58%),
+    linear-gradient(rgba(0, 0, 0, var(--s)), rgba(0, 0, 0, var(--s))), linear-gradient(160deg, #12306a 0%, #0a1a3e 70%);
+  box-shadow: inset 0 0 0 1px rgba(91, 196, 226, calc(0.1 + var(--g) * 0.55)), inset 0 1px 0 rgba(191, 233, 247, calc(var(--g) * 0.8)),
+    0 0 calc(var(--g) * 30px) rgba(91, 196, 226, calc(var(--g) * 0.35));
   transform: perspective(650px) rotateX(-92deg);
   transform-origin: 50% 0%;
   backface-visibility: hidden;
@@ -550,8 +551,8 @@
 /* Lo que viene después sube por encima del hero fijado mientras caen las últimas baldosas */
 @media (prefers-reduced-motion: no-preference) {
   .hero + .tape-slot {
-    margin-top: -58vh;
-    margin-top: -58svh;
+    margin-top: -64vh;
+    margin-top: -64svh;
   }
   .hero ~ .nosotros {
     padding-top: clamp(2.5rem, 5vw, 4rem);
@@ -559,7 +560,7 @@
 }
 @media (prefers-reduced-motion: no-preference) and (min-width: 760px) {
   .hero + .tape-slot {
-    margin-top: -70vh;
-    margin-top: -70svh;
+    margin-top: -76vh;
+    margin-top: -76svh;
   }
 }
