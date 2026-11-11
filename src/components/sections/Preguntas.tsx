@@ -171,7 +171,7 @@ export default function Preguntas() {
       <div className="wrap">
         <ul className="guarantees" aria-label="Garantías">
           {GUARANTEES.map((g) => (
-            <li className="guarantee glass glass--liquid" key={g.t}>
+            <li className="guarantee glass" key={g.t}>
               <strong>{g.t}</strong>
               <span>{g.d}</span>
             </li>

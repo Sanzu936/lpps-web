@@ -184,17 +184,10 @@ p {
   pointer-events: none;
   background: radial-gradient(38vmax 30vmax at 22% 30%, rgba(32, 80, 142, 0.32), transparent 70%),
     radial-gradient(30vmax 26vmax at 78% 70%, rgba(91, 196, 226, 0.12), transparent 70%);
-  animation: drift 38s ease-in-out infinite alternate;
+  /* Quieto: una capa fija mayor que la pantalla animada sin parar obligaba a recomponer la pantalla
+     (y todos los desenfoques de encima) en cada fotograma, aunque no se tocara nada. */
+  transform: translate3d(-3%, -2%, 0);
 }
-@keyframes drift {
-  from {
-    transform: translate3d(-3%, -2%, 0) rotate(0deg);
-  }
-  to {
-    transform: translate3d(4%, 3%, 0) rotate(8deg);
-  }
-}
-
 /* ==========================================================================
    Cristal líquido
    .glass: panel de cristal con refracción (en Chromium), desenfoque, borde de luz
@@ -301,9 +294,9 @@ p {
 .btn--ghost {
   --btn-bg: transparent;
   --btn-fg: var(--pearl);
+  /* sin backdrop-filter: detrás casi siempre hay fondo oscuro liso, el desenfoque no se veía y había
+     que recalcularlo en cada fotograma de scroll para cada botón */
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-  -webkit-backdrop-filter: blur(14px) saturate(170%);
-  backdrop-filter: blur(14px) saturate(170%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 14px 34px -18px rgba(0, 0, 0, 0.8);
 }
 .btn--ghost::before {
@@ -682,18 +675,34 @@ html.menu-open body {
     box-shadow: 0 0 12px rgba(191, 233, 247, 0.9);
     transition: opacity 200ms ease;
   }
+  /* El anillo se dibuja a su tamaño máximo (96 px) y se reduce con `scale`: crecer al pasar por un
+     enlace no obliga a recalcular el diseño (antes se animaban width/height/margin) y no pierde
+     nitidez. Sin backdrop-filter: desenfocar lo de debajo en cada fotograma del movimiento era lo
+     más caro del cursor. Las sombras se multiplican por --k (= 1/escala) para que el borde y los
+     brillos midan en pantalla lo mismo que antes. */
+  /* .cursor__ring lo mueve GSAP (transform); .cursor__lens cambia de tamaño con `scale` por dentro */
   .cursor__ring {
-    width: 44px;
-    height: 44px;
-    margin: -22px 0 0 -22px;
+    width: 0;
+    height: 0;
+  }
+  .cursor__lens {
+    --rs: 0.4583; /* 44 px */
+    --k: 2.1818;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    width: 96px;
+    height: 96px;
+    margin: -48px 0 0 -48px;
     display: grid;
     place-items: center;
+    scale: var(--rs);
     background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.03) 60%);
-    -webkit-backdrop-filter: blur(3px) saturate(190%) brightness(1.18);
-    backdrop-filter: blur(3px) saturate(190%) brightness(1.18);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -2px 6px rgba(91, 196, 226, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.22),
-      0 8px 24px -8px rgba(0, 0, 0, 0.6);
-    transition: width 450ms var(--ease-expo), height 450ms var(--ease-expo), margin 450ms var(--ease-expo), opacity 200ms ease;
+    box-shadow: inset 0 calc(1px * var(--k)) calc(1px * var(--k)) rgba(255, 255, 255, 0.6),
+      inset 0 calc(-2px * var(--k)) calc(6px * var(--k)) rgba(91, 196, 226, 0.25), inset 0 0 0 calc(1px * var(--k)) rgba(255, 255, 255, 0.22),
+      0 calc(8px * var(--k)) calc(24px * var(--k)) calc(-8px * var(--k)) rgba(0, 0, 0, 0.6);
+    transition: scale 450ms var(--ease-expo), opacity 200ms ease;
   }
   .cursor__label {
     font-family: var(--font-body);
@@ -707,20 +716,16 @@ html.menu-open body {
     white-space: nowrap;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
   }
-  .cursor[data-state="link"] .cursor__ring {
-    width: 66px;
-    height: 66px;
-    margin: -33px 0 0 -33px;
+  .cursor[data-state="link"] .cursor__lens {
+    --rs: 0.6875; /* 66 px */
+    --k: 1.4545;
     /* sobre un enlace no se deforma ni desenfoca lo que hay debajo: solo un halo */
     background: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow: inset 0 0 0 1px rgba(191, 233, 247, 0.55), 0 0 18px rgba(91, 196, 226, 0.25);
+    box-shadow: inset 0 0 0 calc(1px * var(--k)) rgba(191, 233, 247, 0.55), 0 0 calc(18px * var(--k)) rgba(91, 196, 226, 0.25);
   }
-  .cursor[data-state="label"] .cursor__ring {
-    width: 96px;
-    height: 96px;
-    margin: -48px 0 0 -48px;
+  .cursor[data-state="label"] .cursor__lens {
+    --rs: 1; /* 96 px */
+    --k: 1;
   }
   .cursor[data-state="label"] .cursor__label {
     opacity: 1;
@@ -761,9 +766,9 @@ html.grain-on .grain {
   padding: 0.85rem 0;
   transform: rotate(var(--tape-rot, -2deg)) scale(1.06);
   color: var(--pearl);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  backdrop-filter: blur(16px) saturate(170%);
+  /* Sin backdrop-filter (era un desenfoque de 1440 px de ancho recalculado en cada fotograma de scroll):
+     un tinte azul casi opaco da el mismo color que tenía el cristal sobre el muro de baldosas. */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)), rgba(12, 52, 130, 0.86);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(255, 255, 255, 0.08), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
 }
 .tape--ink {
