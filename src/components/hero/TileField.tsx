@@ -159,6 +159,17 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
     };
   }, [cols, rows, geometry, material, onReady]);
 
+  // Cuando el muro de baldosas se vuelve a abrir, se dibuja enseguida (sin esperar a un gesto)
+  useEffect(() => {
+    heroState.wake = () => {
+      activeUntil.current = performance.now() + 900;
+      invalidate();
+    };
+    return () => {
+      heroState.wake = null;
+    };
+  }, [invalidate]);
+
   // Entrada del puntero (ratón, toque) en coordenadas de pantalla normalizadas
   const pointer = useRef({ ndc: new THREE.Vector2(0.45, 0.1), active: 0, last: 0 });
   useEffect(() => {
@@ -168,14 +179,14 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       pointer.current.ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
       pointer.current.active = 1;
       pointer.current.last = performance.now();
-      if (demand) {
+      if (demand && !heroState.covered) {
         // en móvil se sigue dibujando hasta después de que la lente se retire (ver lensOn)
         activeUntil.current = performance.now() + (mobile ? 3400 : 1500);
         invalidate();
       }
     };
     const onScroll = () => {
-      if (!demand) return;
+      if (!demand || heroState.covered) return;
       activeUntil.current = performance.now() + 900;
       invalidate();
     };
@@ -241,7 +252,7 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
     u.uFlat.value = p * 0.9;
     camera.position.set(camBase.x, camBase.y - p * 4 - scrollY * 2, camBase.z - p * 3);
     camera.lookAt(0, p * 2, 0);
-    if (demand && performance.now() < activeUntil.current && heroState.visible) state.invalidate();
+    if (demand && performance.now() < activeUntil.current && heroState.visible && !heroState.covered) state.invalidate();
   });
 
   void size;
@@ -252,15 +263,22 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
 function Pauser() {
   const setFrameloop = useThree((s) => s.setFrameloop);
   useFrame(() => {
-    if (!heroState.visible) setFrameloop("never");
+    if (!heroState.visible || heroState.covered) setFrameloop("never");
   });
   useEffect(() => {
     const id = window.setInterval(() => {
-      if (heroState.visible) setFrameloop("always");
+      if (heroState.visible && !heroState.covered && !document.hidden) setFrameloop("always");
     }, 250);
-    const onVis = () => setFrameloop(document.hidden || !heroState.visible ? "never" : "always");
+    const onVis = () => setFrameloop(document.hidden || !heroState.visible || heroState.covered ? "never" : "always");
     document.addEventListener("visibilitychange", onVis);
+    // en modo continuo, al abrirse el muro se reanuda el bucle en el acto (no a los 250 ms)
+    const prevWake = heroState.wake;
+    heroState.wake = () => {
+      prevWake?.();
+      if (!document.hidden) setFrameloop("always");
+    };
     return () => {
+      heroState.wake = prevWake;
       window.clearInterval(id);
       document.removeEventListener("visibilitychange", onVis);
     };

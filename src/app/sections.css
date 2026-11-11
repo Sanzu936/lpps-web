@@ -1067,16 +1067,27 @@
   left: 0;
   right: 0;
   top: 0;
-  filter: brightness(calc(0.15 + var(--power) * 0.85));
   transform: translateY(0);
   transition: transform 1.4s var(--ease-in-out);
-  will-change: transform;
+}
+/* "Encendido" de la pantalla: un velo negro con opacidad 1 − brillo equivale a filter: brightness(),
+   pero sin filtrar una captura de miles de píxeles de alto en cada fotograma. Encendida, no pinta nada. */
+.screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: #000;
+  opacity: calc((1 - var(--power)) * 0.85);
 }
 .screen__img img {
   width: 100%;
   height: auto;
 }
 .screen.is-scrolling .screen__img {
+  /* capa propia solo mientras se recorre (antes las 8 capturas enormes vivían siempre en la GPU) */
+  will-change: transform;
   transform: translateY(calc(-100% + 100cqh));
   /* Más larga cuanto más alta es la página, pero nunca más de 9 s (la del móvil mide 22 pantallas). */
   transition-duration: min(calc(var(--ratio, 6) * 1.1s), 9s);

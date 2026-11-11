@@ -143,7 +143,7 @@ export default function LensPass({ radius = 120 }: { radius?: number }) {
     const noLens = (window as Window & { __lppsPoster?: boolean }).__lppsPoster === true;
     const target = noLens || !heroState.lensOn ? 0 : Math.max(0, 1 - heroState.progress * 2.2);
     u.uAmt.value += (target * Math.min(1, state.clock.elapsedTime / 1.6) - u.uAmt.value) * 0.08;
-    if (Math.abs(target - u.uAmt.value) > 0.005) state.invalidate(); // termina el fundido también en modo bajo demanda
+    if (Math.abs(target - u.uAmt.value) > 0.005 && !heroState.covered) state.invalidate(); // termina el fundido también en modo bajo demanda
 
     state.gl.setRenderTarget(rt);
     state.gl.render(state.scene, state.camera);
