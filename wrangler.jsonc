@@ -1,0 +1,10 @@
+{
+  // Publicación en Cloudflare (Workers con assets estáticos), igual que el repo demos-webs.
+  // Comando de build: npm run build  ·  Comando de despliegue: npx wrangler deploy
+  "name": "lpps-web",
+  "compatibility_date": "2026-10-28",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
