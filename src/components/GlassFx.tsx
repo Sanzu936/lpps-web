@@ -29,9 +29,31 @@ export default function GlassFx() {
       if (!raf) raf = requestAnimationFrame(update);
     };
     window.addEventListener("pointermove", onMove, { passive: true });
+
     return () => {
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Mientras hay scroll, cristal sin refracción (ver .is-scrolling en globals.css)
+  useEffect(() => {
+    if (typeof CSS === "undefined" || !CSS.supports("backdrop-filter", "url(#x)")) return;
+    const html = document.documentElement;
+    let stop = 0;
+    const onScroll = () => {
+      if (!stop) html.classList.add("is-scrolling");
+      else window.clearTimeout(stop);
+      stop = window.setTimeout(() => {
+        stop = 0;
+        html.classList.remove("is-scrolling");
+      }, 220);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(stop);
+      html.classList.remove("is-scrolling");
     };
   }, []);
 

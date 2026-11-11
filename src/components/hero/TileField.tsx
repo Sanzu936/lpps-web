@@ -295,8 +295,11 @@ export default function TileField({ onReady, lite = false }: Props) {
     <Canvas
       flat
       frameloop={demand ? "demand" : "always"}
-      dpr={lite ? 0.75 : mobile ? [1, 1.25] : [1, 1.75]}
-      gl={{ antialias: !mobile, alpha: false, powerPreference: "high-performance" }}
+      // Resolución 1× (antes hasta 1,75×): el fondo se dibuja con muchos menos píxeles por fotograma.
+      // Sin antialias: la escena se pinta en el buffer de LensPass, que nunca lo tuvo; en el lienzo solo
+      // se pinta un rectángulo a pantalla completa, así que pedirlo solo gastaba memoria.
+      dpr={lite ? 0.75 : 1}
+      gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
       camera={{ position: mobile ? [0, -13, 14] : [2, -12, 10.5], fov: mobile ? 52 : 42, near: 0.1, far: 80 }}
       onCreated={({ gl }) => gl.setClearColor("#03050b")}
     >
