@@ -946,6 +946,9 @@
   color: var(--muted);
   max-width: 40ch;
 }
+.work__live {
+  margin-top: 1.6rem;
+}
 .sample-tag {
   display: inline-flex;
   align-items: center;

@@ -1,0 +1,63 @@
+1:"$Sreact.fragment"
+2:"/trabajos/candela/_next/static/chunks/1crtqxkuncw87.js"
+3:"/trabajos/candela/_next/static/chunks/409jdew3ci7au.js"
+4:"TransitionProvider"
+5:I[60225,["$2","$3"],"$4"]
+6:I[70119,["$2","$3"],"default"]
+7:I[39756,["$2","$3"],"default"]
+8:I[37457,["$2","$3"],"default"]
+9:I[60225,["$2","$3"],"TLink"]
+a:I[69268,["$2","$3"],"default"]
+e:"/trabajos/candela/_next/static/chunks/30suwudcukdcz.js"
+f:"/trabajos/candela/_next/static/chunks/3q03gwd08qeeu.js"
+10:I[46179,["$2","$3","$e","$f"],"default"]
+11:I[48336,["$2","$3","$e","$f"],"default"]
+12:I[81371,["$2","$3","$e","$f"],"default"]
+13:I[98878,["$2","$3","$e","$f"],"default"]
+14:I[20903,["$2","$3","$e","$f"],"default"]
+15:I[16749,["$2","$3","$e","$f"],"default"]
+16:I[25582,["$2","$3","$e","$f"],"default"]
+17:I[98212,["$2","$3","$e","$f"],"default"]
+18:I[15042,["$2","$3","$e","$f"],"default"]
+19:I[89286,["$2","$3","$e","$f"],"default"]
+1f:"ViewportBoundary"
+20:I[97367,["$2","$3"],"$1f"]
+21:"MetadataBoundary"
+22:I[97367,["$2","$3"],"$21"]
+23:"$Sreact.suspense"
+:HL["/trabajos/candela/_next/static/chunks/0ua8gz74020_4.css","style"]
+c:X
+d:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[[["$","$L10",null,{}],["$","$L11",null,{}],["$","$L12",null,{"items":["Reuniones","Congresos","Entrevistas","Directos","Exámenes orales","Bodas","Clases","Presentaciones"]}],["$","$L13",null,{}],["$","$L14",null,{}],["$","$L15",null,{}],["$","$L16",null,{}],["$","$L17",null,{}],["$","$L18",null,{}],["$","$L19",null,{"items":[{"q":"Soy muy tímida, muy tímido. ¿Esto es para mí?","a":"Sí. La timidez no se quita, se gestiona. No vas a convertirte en otra persona: vas a aprender a hablar en público siendo tú, con tu ritmo y tu tono."},{"q":"¿Cuánto tiempo necesito a la semana?","a":"Unas tres horas: una sesión en directo de una hora, las lecciones cortas y tus ensayos grabados. Todo está pensado para encajar en una semana de trabajo normal."},{"q":"¿Sirve para videollamadas y vídeos para redes?","a":"Sí. Hay ejercicios específicos para hablar a cámara, porque la cámara también es público, aunque no aplauda."},{"q":"¿Qué diferencia hay entre Tarima y la mentoría Primera Fila?","a":"Tarima es un programa en grupo de ocho semanas. Primera Fila es un acompañamiento individual de doce semanas para preparar una charla concreta. Si dudas, reserva una llamada y lo vemos."},{"q":"¿Candela Ruiseñor existe de verdad?","a":"No. Es una marca ficticia creada por LPPS para enseñar cómo puede ser la web de una coach o formadora online. Las personas, testimonios, cifras y precios son inventados, y aquí no se cobra nada."}],"title":"Preguntas frecuentes","intro":"Lo que más me preguntan antes de empezar. Si te queda alguna duda, resérvate una llamada y la resolvemos de viva voz."}],"$L1a"],["$L1b","$L1c"],"$L1d"]}],"p":"$@1e","v":null,"s":"$c"}}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/trabajos/candela/_next/static/chunks/0ua8gz74020_4.css","precedence":"next"}],["$","script","script-0",{"src":"/trabajos/candela/_next/static/chunks/1crtqxkuncw87.js","async":true}],["$","script","script-1",{"src":"/trabajos/candela/_next/static/chunks/409jdew3ci7au.js","async":true}]],["$","html",null,{"lang":"es","children":[["$","head",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"@font-face{font-family:\"Anybody\";src:url(\"/trabajos/candela/fonts/anybody-var.woff2\") format(\"woff2\");font-weight:100 900;font-stretch:50% 150%;font-display:swap}@font-face{font-family:\"Hanken Grotesk\";src:url(\"/trabajos/candela/fonts/hanken-grotesk-var.woff2\") format(\"woff2\");font-weight:100 900;font-display:swap}"}}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"try{if(!sessionStorage.getItem(\"cr-fonts\")){[\"/trabajos/candela/fonts/anybody-var.woff2\",\"/trabajos/candela/fonts/hanken-grotesk-var.woff2\"].forEach(function(h){var l=document.createElement(\"link\");l.rel=\"preload\";l.as=\"font\";l.type=\"font/woff2\";l.crossOrigin=\"anonymous\";l.href=h;document.head.appendChild(l)});sessionStorage.setItem(\"cr-fonts\",\"1\")}}catch(e){}"}}],false]}],["$","body",null,{"children":[["$","a",null,{"className":"skip","href":"#contenido","children":"Saltar al contenido"}],["$","$L5",null,{"children":[["$","$L6",null,{}],["$","main",null,{"id":"contenido","tabIndex":-1,"style":{"outline":"none"},"children":["$","$L7",null,{"parallelRouterKey":"children","template":["$","$L8",null,{}],"notFound":[["$","section",null,{"className":"nf bg-chicle","children":["$","div",null,{"children":[["$","h1",null,{"className":"display","children":"Silencio."}],["$","p",null,{"className":"lead","style":{"margin":"20px auto 32px"},"children":"Esta página no existe, ni siquiera en una web de muestra."}],["$","$L9",null,{"href":"/","className":"btn","children":[["$","span",null,{"className":"btn__dot","aria-hidden":"true"}],"Vuelve al inicio"]}]]}]}],[]]}]}],["$","footer",null,{"className":"footer dark","children":["$","div",null,{"className":"wrap","children":[["$","p",null,{"className":"footer__mark display display--wide","aria-hidden":"true","children":"Habla."}],["$","div",null,{"className":"footer__grid","children":[["$","div",null,{"className":"footer__legal","children":[["$","h2",null,{"children":"Una marca que no existe"}],["$","p",null,{"children":[["$","strong",null,{"children":"Candela Ruiseñor es una marca ficticia."}]," Ella, sus alumnos, los testimonios, las cifras y los precios son inventados para esta web de muestra. Aquí no se cobra nada ni se recogen datos personales."]}],["$","p",null,{"style":{"marginTop":16},"children":["Diseño y desarrollo:"," ",["$","a",null,{"className":"link-u","href":"https://lppstech.com","target":"_blank","rel":"noopener","children":"LPPS, webs para negocios online"}],"."]}]]}],["$","div",null,{"children":[["$","h2",null,{"children":"Navega"}],["$","ul",null,{"children":[["$","li",null,{"children":["$","$L9",null,{"href":"/","children":"Inicio"}]}],[["$","li","/#metodo",{"children":["$","$L9",null,{"href":"/#metodo","children":"El método"}]}],["$","li","/programa/",{"children":["$","$L9",null,{"href":"/programa/","children":"Programa Tarima"}]}],["$","li","/sobre-mi/",{"children":["$","$L9",null,{"href":"/sobre-mi/","children":"Sobre mí"}]}]],["$","li",null,{"children":["$","$L9",null,{"href":"/reserva/","children":"Reserva tu llamada"}]}]]}]]}],["$","div",null,{"children":[["$","h2",null,{"children":"Gratis"}],["$","ul",null,{"children":[["$","li",null,{"children":["$","$L9",null,{"href":"/reserva/#calentamiento","children":"Calentamiento de voz"}]}],["$","li",null,{"children":["$","$L9",null,{"href":"/reserva/#tres-actos","children":"Plantilla de tres actos"}]}],["$","li",null,{"children":["$","$L9",null,{"href":"/reserva/#test-nervios","children":"Test de nervios"}]}]]}]]}]]}]]}]}],["$","$La",null,{}]]}]]}]]}]]}],"p":"$@b","v":null,"s":"$c"},"c":"$Qd"},"h":{"r":["$","$1","h",{"children":[null,["$","$L20",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#ff4f1f"}]]}],["$","$L22",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$23",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Candela Ruiseñor · Habla en público sin esconderte"}],["$","meta","1",{"name":"description","content":"Programa Tarima: ocho semanas para hablar en público con tu voz, tu ritmo y sin que te tiemblen las rodillas. Web de muestra de una marca ficticia diseñada por LPPS."}],"$L24","$L25","$L26","$L27","$L28","$L29","$L2a","$L2b","$L2c","$L2d","$L2e","$L2f","$L30","$L31","$L32","$L33","$L34"]}]}],null]}],null]}],"p":"$@35","v":null,"s":"$c"}},"a":"$@36","u":"$@37","b":"3LeMTi-WYX1y5W_ZSokd9"}
+38:I[19382,["$2","$3","$e","$f"],"default"]
+39:I[97367,["$2","$3"],"OutletBoundary"]
+3b:I[27201,["$2","$3"],"IconMark"]
+1a:["$","$L38",null,{}]
+1b:["$","script","script-0",{"src":"/trabajos/candela/_next/static/chunks/30suwudcukdcz.js","async":true}]
+1c:["$","script","script-1",{"src":"/trabajos/candela/_next/static/chunks/3q03gwd08qeeu.js","async":true}]
+1d:["$","$L39",null,{"children":["$","$23",null,{"name":"Next.MetadataOutlet","children":"$@3a"}]}]
+24:["$","meta","2",{"property":"og:title","content":"Candela Ruiseñor · Habla en público sin esconderte"}]
+25:["$","meta","3",{"property":"og:description","content":"Programa Tarima: ocho semanas para hablar en público con tu voz, tu ritmo y sin que te tiemblen las rodillas. Web de muestra de una marca ficticia diseñada por LPPS."}]
+26:["$","meta","4",{"property":"og:site_name","content":"Candela Ruiseñor (marca ficticia)"}]
+27:["$","meta","5",{"property":"og:locale","content":"es_ES"}]
+28:["$","meta","6",{"property":"og:image","content":"https://lppstech.com/trabajos/candela/og.jpg"}]
+29:["$","meta","7",{"property":"og:image:width","content":"1200"}]
+2a:["$","meta","8",{"property":"og:image:height","content":"630"}]
+2b:["$","meta","9",{"property":"og:image:alt","content":"Candela Ruiseñor, coach ficticia de oratoria, con un micrófono"}]
+2c:["$","meta","10",{"property":"og:type","content":"website"}]
+2d:["$","meta","11",{"name":"twitter:card","content":"summary_large_image"}]
+2e:["$","meta","12",{"name":"twitter:title","content":"Candela Ruiseñor · Habla en público sin esconderte"}]
+2f:["$","meta","13",{"name":"twitter:description","content":"Programa Tarima: ocho semanas para hablar en público con tu voz, tu ritmo y sin que te tiemblen las rodillas. Web de muestra de una marca ficticia diseñada por LPPS."}]
+30:["$","meta","14",{"name":"twitter:image","content":"https://lppstech.com/trabajos/candela/og.jpg"}]
+31:["$","link","15",{"rel":"icon","href":"/trabajos/candela/favicon.svg","type":"image/svg+xml"}]
+32:["$","link","16",{"rel":"icon","href":"/trabajos/candela/favicon.ico","sizes":"32x32"}]
+33:["$","link","17",{"rel":"apple-touch-icon","href":"/trabajos/candela/apple-touch-icon.png"}]
+34:["$","$L3b","18",{}]
+c:300
+3a:null
+37:true
+c:C
+36:0
+b:"$undefined"
+35:"$undefined"
+1e:"$undefined"

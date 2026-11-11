@@ -25,6 +25,8 @@ export type Trabajo = {
   descripcion: string;
   /** true = proyecto de muestra (negocio inventado). Muestra la etiqueta. */
   muestra: boolean;
+  /** opcional: ruta a la web en vivo (p. ej. "/trabajos/sigila/"); muestra el botón "Ver la web en vivo" */
+  url?: string;
   escritorio: Captura;
   movil: Captura;
 };
@@ -42,8 +44,42 @@ export type AntesDespues = {
 
 // Las dimensiones se rellenan con scripts/capturas.mjs (genera src/content/capturas.json).
 import capturas from "./capturas.json";
+import muestras from "./capturas-muestras.json";
 
 export const TRABAJOS: Trabajo[] = [
+  {
+    id: "sigila",
+    nombre: "Sigila",
+    tipo: "SaaS · facturación para autónomos",
+    descripcion:
+      "Web de producto con escena 3D propia en el hero, la interfaz de la app funcionando sola, precios y prueba gratis. Pensada para que un autónomo entienda el producto en diez segundos.",
+    muestra: true,
+    url: "/trabajos/sigila/",
+    escritorio: muestras.sigila.escritorio,
+    movil: muestras.sigila.movil,
+  },
+  {
+    id: "oquedad",
+    nombre: "OQUEDAD",
+    tipo: "Tienda online · cerámica hecha a mano",
+    descripcion:
+      "E-commerce pequeño con una vasija en 3D que se esmalta al hacer scroll, fichas de producto, colección y carrito. Para que comprar cerámica por internet dé confianza.",
+    muestra: true,
+    url: "/trabajos/oquedad/",
+    escritorio: muestras.oquedad.escritorio,
+    movil: muestras.oquedad.movil,
+  },
+  {
+    id: "candela",
+    nombre: "Candela Ruiseñor",
+    tipo: "Coach online · programa de oratoria",
+    descripcion:
+      "Web de infoproductora con vídeo en el hero, el método paso a paso, el programa estrella y testimonios. Todo lleva a reservar una llamada.",
+    muestra: true,
+    url: "/trabajos/candela/",
+    escritorio: muestras.candela.escritorio,
+    movil: muestras.candela.movil,
+  },
   {
     id: "lpps",
     nombre: "Esta misma web",

@@ -204,10 +204,10 @@ export default function Trabajos() {
     <section ref={root} id="trabajos" className="section trabajos" aria-labelledby="trabajos-title">
       <div className="wrap">
         <div className="trabajos__head">
-          <RevealTitle id="trabajos-title" lines={["La mejor muestra", "es esta web."]} />
+          <RevealTitle id="trabajos-title" lines={["Así quedan", "nuestras webs."]} />
           <p className="lede">
-            Así de cuidada queda la tuya, en el ordenador y en el móvil. Pasa el ratón por las pantallas, o tócalas, para
-            recorrerlas enteras.
+            Tres webs de muestra para tres tipos de negocio online, y esta misma. Pasa el ratón por las pantallas, o tócalas,
+            para recorrerlas enteras, o ábrelas en vivo.
           </p>
         </div>
 
@@ -221,6 +221,12 @@ export default function Trabajos() {
               </h3>
               <p className="work__type">{t.tipo}</p>
               <p className="work__desc">{t.descripcion}</p>
+              {t.url ? (
+                <a className="btn btn--ghost work__live" href={withBase(t.url)} target="_blank" rel="noopener">
+                  <span className="btn__label">Ver la web en vivo</span>
+                  <span className="sr-only"> (se abre en una pestaña nueva)</span>
+                </a>
+              ) : null}
             </div>
           </article>
         ))}

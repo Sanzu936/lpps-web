@@ -1,0 +1,38 @@
+{
+  "sigila": {
+    "escritorio": {
+      "src": "/trabajos/sigila-escritorio",
+      "width": 1000,
+      "height": 5200
+    },
+    "movil": {
+      "src": "/trabajos/sigila-movil",
+      "width": 390,
+      "height": 5600
+    }
+  },
+  "oquedad": {
+    "escritorio": {
+      "src": "/trabajos/oquedad-escritorio",
+      "width": 1000,
+      "height": 5200
+    },
+    "movil": {
+      "src": "/trabajos/oquedad-movil",
+      "width": 390,
+      "height": 5600
+    }
+  },
+  "candela": {
+    "escritorio": {
+      "src": "/trabajos/candela-escritorio",
+      "width": 1000,
+      "height": 5200
+    },
+    "movil": {
+      "src": "/trabajos/candela-movil",
+      "width": 390,
+      "height": 5600
+    }
+  }
+}

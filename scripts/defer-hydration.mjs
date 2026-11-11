@@ -8,9 +8,13 @@ const OUT = "out";
 const SCRIPT = /<script src="([^"]*\/_next\/static\/chunks\/[^"]+\.js)"((?: id="[^"]*")?) async=""><\/script>/g;
 const PRELOAD = /<link rel="preload" as="script" fetchPriority="low" href="[^"]+"\/>/g;
 
+// Las webs de muestra de out/trabajos/<slug>/ son builds independientes: se copian tal cual.
+const SKIP = new Set([join(OUT, "trabajos")]);
+
 function walk(dir) {
   return readdirSync(dir).flatMap((f) => {
     const p = join(dir, f);
+    if (SKIP.has(p)) return [];
     return statSync(p).isDirectory() ? walk(p) : p.endsWith(".html") ? [p] : [];
   });
 }
