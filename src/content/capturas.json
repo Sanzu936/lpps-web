@@ -1,0 +1,32 @@
+{
+  "escritorio": {
+    "src": "/trabajos/lpps-escritorio",
+    "width": 1000,
+    "height": 6415
+  },
+  "final": {
+    "src": "/trabajos/lpps-final",
+    "width": 1440,
+    "height": 900
+  },
+  "plano": {
+    "src": "/trabajos/lpps-plano",
+    "width": 1440,
+    "height": 900
+  },
+  "movil": {
+    "src": "/trabajos/lpps-movil",
+    "width": 390,
+    "height": 8568
+  },
+  "finalMovil": {
+    "src": "/trabajos/lpps-final-movil",
+    "width": 390,
+    "height": 844
+  },
+  "planoMovil": {
+    "src": "/trabajos/lpps-plano-movil",
+    "width": 390,
+    "height": 844
+  }
+}

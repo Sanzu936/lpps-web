@@ -1,0 +1,3 @@
+:HL["/trabajos/sigila/_next/static/chunks/0bnr6idatk0tz.css","style"]
+1:[["children",{"s":"__PAGE__","h":128}]]
+0:{"b":"M_I53mKEUcW2syuH2UvtE","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

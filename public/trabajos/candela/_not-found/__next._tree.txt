@@ -1,0 +1,4 @@
+:HL["/trabajos/candela/_next/static/chunks/0ua8gz74020_4.css","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"3LeMTi-WYX1y5W_ZSokd9","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
