@@ -5,13 +5,38 @@ import { TRABAJOS, ANTES_DESPUES, type Captura } from "@/content/trabajos";
 import { withBase } from "@/config/site";
 import RevealTitle from "../RevealTitle";
 
-function Pic({ c, alt, sizes, eager = false, mobile }: { c: Captura; alt: string; sizes: string; eager?: boolean; mobile?: Captura }) {
+/** Anchos reducidos que genera scripts/variantes.mjs para las capturas de las pantallas. */
+const ANCHOS: Record<number, number[]> = { 1000: [450, 700], 390: [180, 260] };
+
+/** srcset con la captura original y sus versiones reducidas (si las hay). */
+function srcset(c: Captura, ext: "avif" | "webp", scaled: boolean) {
+  const extra = scaled ? ANCHOS[c.width] ?? [] : [];
+  if (!extra.length) return withBase(`${c.src}.${ext}`);
+  return [...extra.map((w) => `${withBase(`${c.src}-${w}.${ext}`)} ${w}w`), `${withBase(`${c.src}.${ext}`)} ${c.width}w`].join(", ");
+}
+
+function Pic({
+  c,
+  alt,
+  sizes,
+  eager = false,
+  mobile,
+  scaled = false,
+}: {
+  c: Captura;
+  alt: string;
+  sizes: string;
+  eager?: boolean;
+  mobile?: Captura;
+  scaled?: boolean;
+}) {
   return (
     <picture>
       {mobile ? <source media="(max-width: 759px)" type="image/avif" srcSet={withBase(`${mobile.src}.avif`)} /> : null}
       {mobile ? <source media="(max-width: 759px)" type="image/webp" srcSet={withBase(`${mobile.src}.webp`)} /> : null}
-      <source type="image/avif" srcSet={withBase(`${c.src}.avif`)} sizes={sizes} />
+      <source type="image/avif" srcSet={srcset(c, "avif", scaled)} sizes={sizes} />
       <img
+        srcSet={scaled ? srcset(c, "webp", true) : undefined}
         src={withBase(`${c.src}.webp`)}
         alt={alt}
         width={c.width}
@@ -42,7 +67,7 @@ function Screen({ c, alt, label, sizes }: { c: Captura; alt: string; label: stri
   return (
     <div className={`screen ${on ? "is-scrolling" : ""}`} style={{ "--ratio": c.height / c.width } as React.CSSProperties}>
       <div className="screen__img">
-        <Pic c={c} alt={alt} sizes={sizes} />
+        <Pic c={c} alt={alt} sizes={sizes} scaled />
       </div>
       <button
         type="button"
@@ -69,7 +94,7 @@ function Devices({ t }: { t: (typeof TRABAJOS)[number] }) {
         <div className="laptop__lid">
           <div className="laptop__bezel">
             <span className="laptop__cam" aria-hidden="true" />
-            <Screen c={t.escritorio} alt={`${t.nombre} en un portátil`} label={`la versión de escritorio de ${t.nombre.toLowerCase()}`} sizes="(min-width: 1000px) 760px, 92vw" />
+            <Screen c={t.escritorio} alt={`${t.nombre} en un portátil`} label={`la versión de escritorio de ${t.nombre.toLowerCase()}`} sizes="(min-width: 1400px) 690px, (min-width: 1000px) 48vw, 77vw" />
           </div>
         </div>
         <div className="laptop__base" aria-hidden="true">
@@ -79,7 +104,7 @@ function Devices({ t }: { t: (typeof TRABAJOS)[number] }) {
       <div className="phone">
         <div className="phone__frame">
           <span className="phone__island" aria-hidden="true" />
-          <Screen c={t.movil} alt={`${t.nombre} en un móvil`} label={`la versión móvil de ${t.nombre.toLowerCase()}`} sizes="260px" />
+          <Screen c={t.movil} alt={`${t.nombre} en un móvil`} label={`la versión móvil de ${t.nombre.toLowerCase()}`} sizes="(min-width: 1400px) 220px, (min-width: 1000px) 17vw, 29vw" />
         </div>
       </div>
     </div>

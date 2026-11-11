@@ -5,6 +5,7 @@
 // Genera public/trabajos/<slug>-escritorio y <slug>-movil (.avif y .webp) y src/content/capturas-muestras.json.
 import { chromium } from "playwright";
 import sharp from "sharp";
+import { variantes } from "./variantes.mjs";
 import { writeFileSync } from "node:fs";
 
 const BASE = process.argv[2] || "http://localhost:4322";
@@ -54,3 +55,4 @@ for (const slug of SLUGS) {
 }
 await browser.close();
 writeFileSync("src/content/capturas-muestras.json", JSON.stringify(res, null, 2) + "\n");
+await variantes(); // tamaños reducidos para las pantallas (srcset)
