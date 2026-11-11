@@ -1,5 +1,6 @@
 "use client";
 import { useRef } from "react";
+import { sin } from "@/lib/diag";
 import { useMotion } from "@/lib/motion";
 import { getLenis } from "@/lib/scroll";
 import { heroState } from "./heroState";
@@ -29,7 +30,7 @@ export default function HeroController() {
       },
       (ctx) => {
         const { motion, wide } = ctx.conditions as { motion: boolean; wide: boolean };
-        if (!motion) {
+        if (!motion || sin("transicion")) {
           heroState.progress = 0;
           return;
         }

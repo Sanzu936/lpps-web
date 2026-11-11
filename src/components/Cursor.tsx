@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { sin } from "@/lib/diag";
 import { hasFinePointer, prefersReducedMotion } from "@/lib/env";
 import { loadMotion } from "@/lib/motion";
 
@@ -12,7 +13,7 @@ export default function Cursor() {
   const label = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!hasFinePointer() || !root.current) return;
+    if (!hasFinePointer() || !root.current || sin("cursor")) return;
     let off = () => {};
     let cancelled = false;
     loadMotion().then(({ gsap }) => {

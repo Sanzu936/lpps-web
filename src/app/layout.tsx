@@ -6,6 +6,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 import GlassFx from "@/components/GlassFx";
 import FoxDefs from "@/components/FoxDefs";
+import DiagFps from "@/components/DiagFps";
+import { diagScript } from "@/lib/diag";
 
 const anybody = localFont({
   src: "../fonts/anybody.woff2",
@@ -58,6 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${anybody.variable} ${schibsted.variable}`}>
       <body>
+        {/* modo diagnóstico (?sin=… / ?fps): solo actúa si la dirección lo pide */}
+        <script dangerouslySetInnerHTML={{ __html: diagScript }} />
         <div className="ambient" aria-hidden="true" />
         <GlassFx />
         <FoxDefs />
@@ -68,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="grain" aria-hidden="true" />
         <Cursor />
         <SmoothScroll />
+        <DiagFps />
       </body>
     </html>
   );
