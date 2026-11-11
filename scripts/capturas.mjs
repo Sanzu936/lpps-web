@@ -2,6 +2,7 @@
 // Uso: npm run build && npx serve out -l 4321 & node scripts/capturas.mjs [http://localhost:4321]
 import { chromium } from "playwright";
 import sharp from "sharp";
+import { variantes } from "./variantes.mjs";
 import { mkdirSync, writeFileSync } from "node:fs";
 
 const BASE = process.argv[2] || "http://localhost:4321";
@@ -100,3 +101,4 @@ await page.context().close();
 await browser.close();
 writeFileSync("src/content/capturas.json", JSON.stringify(res, null, 2) + "\n");
 console.log(res);
+await variantes(); // tamaños reducidos para las pantallas (srcset)
