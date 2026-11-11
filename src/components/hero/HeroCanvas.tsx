@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import { sin } from "@/lib/diag";
 import { useEffect, useState } from "react";
 
 const TileField = dynamic(() => import("./TileField"), { ssr: false });
@@ -53,7 +54,7 @@ export default function HeroCanvas() {
     // o cuando el navegador queda libre unos segundos después de la carga, nunca durante ella.
     const boot = () => {
       detach();
-      if (cancelled) return;
+      if (cancelled || sin("3d")) return;
       const gpu = detectGpu();
       if (gpu === "none") return;
       setMode(gpu === "hardware" ? "full" : "lite");

@@ -5,6 +5,7 @@ import { prefersReducedMotion } from "@/lib/env";
 import { loadMotion, motionNow, motionSettled, type Motion } from "@/lib/motion";
 import { whenIdle } from "@/lib/defer";
 import { setLenis, scrollToHash } from "@/lib/scroll";
+import { sin } from "@/lib/diag";
 
 /**
  * Scroll suave con Lenis sincronizado con el ticker de GSAP,
@@ -19,7 +20,7 @@ export default function SmoothScroll() {
 
     // Lenis + GSAP se cargan aparte, cuando la primera pantalla ya está pintada.
     const cancelBoot = whenIdle(() => {
-      if (prefersReducedMotion()) return;
+      if (prefersReducedMotion() || sin("scroll")) return;
       Promise.all([import("lenis"), loadMotion()]).then(([{ default: LenisCtor }, motion]) => {
         if (cancelled) return;
         m = motion;
