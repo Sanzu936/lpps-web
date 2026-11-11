@@ -31,6 +31,13 @@ export default function Tape({
           { xPercent: reverse ? 0 : -50, duration: 28, ease: "none", repeat: -1, paused: true }
         );
         let base = 1;
+        // Acelerón con el scroll y vuelta suave a su ritmo: se reutilizan las mismas animaciones
+        // (antes se creaban dos nuevas en cada evento de scroll).
+        const boostTo = gsap.quickTo(loop, "timeScale", { duration: 0.25, ease: "power1.out" });
+        let settle: gsap.core.Tween | null = null;
+        const relax = gsap.delayedCall(0.25, () => {
+          settle = gsap.to(loop, { timeScale: base, duration: 1.2, ease: "power2.out" });
+        }).pause();
         const st = ScrollTrigger.create({
           trigger: root.current,
           start: "top bottom",
@@ -39,14 +46,17 @@ export default function Tape({
             const v = self.getVelocity() / 300;
             base = self.direction === 1 ? 1 : -1;
             const boost = gsap.utils.clamp(-6, 6, v * dir * -1);
-            gsap.to(loop, { timeScale: base + boost * 0.6, duration: 0.25, overwrite: true });
-            gsap.to(loop, { timeScale: base, duration: 1.2, delay: 0.25, ease: "power2.out" });
+            settle?.kill();
+            boostTo(base + boost * 0.6);
+            relax.restart(true);
           },
           onToggle: (self) => (self.isActive ? loop.play() : loop.pause()),
         });
         if (st.isActive) loop.play();
         return () => {
           st.kill();
+          relax.kill();
+          settle?.kill();
           loop.kill();
         };
       });

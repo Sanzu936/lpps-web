@@ -1,6 +1,7 @@
 "use client";
 import { useId, useRef } from "react";
 import { useMotion } from "@/lib/motion";
+import { watchPointer } from "@/lib/pointer";
 import { hasFinePointer } from "@/lib/env";
 
 /**
@@ -25,37 +26,56 @@ export default function ElasticName({ name, accent }: { name: string; accent?: b
         });
       apply();
 
+      // Una animación reutilizable por letra y propiedad (antes se creaban n animaciones nuevas en
+      // cada movimiento del ratón) y un solo volcado al DOM por fotograma mientras se mueven.
+      const tw = state.map((st) => ({
+        w: gsap.quickTo(st, "w", { duration: 0.7, ease: "power3.out" }),
+        g: gsap.quickTo(st, "g", { duration: 0.7, ease: "power3.out" }),
+      }));
+      let busyUntil = 0;
+      const tick = () => {
+        apply();
+        if (performance.now() > busyUntil) gsap.ticker.remove(tick);
+      };
+      let lastPos = NaN;
+      let lastAmount = NaN;
       const setFocus = (pos: number, amount: number) => {
+        // sin cambios apreciables, no se hace nada
+        if (amount === lastAmount && (amount === 0 || Math.abs(pos - lastPos) < 0.002)) return;
+        lastPos = pos;
+        lastAmount = amount;
         spans.forEach((_, i) => {
           const c = (i + 0.5) / n;
           const f = Math.exp(-Math.pow((c - pos) * 3.2, 2)) * amount;
-          gsap.to(state[i], {
-            w: 78 + f * 70,
-            g: 260 + f * 420,
-            duration: 0.7,
-            ease: "power3.out",
-            overwrite: true,
-            onUpdate: apply,
-          });
+          tw[i].w(78 + f * 70);
+          tw[i].g(260 + f * 420);
         });
+        if (performance.now() > busyUntil) gsap.ticker.add(tick);
+        busyUntil = performance.now() + 800;
       };
 
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         if (hasFinePointer()) {
-          const onMove = (e: PointerEvent) => {
-            const r = el.getBoundingClientRect();
-            const inY = e.clientY > r.top - 140 && e.clientY < r.bottom + 140;
-            if (!inY) return setFocus(0.5, 0);
-            const textW = (el.querySelector("text") as SVGTextElement).getComputedTextLength() * (r.width / 1000);
-            setFocus((e.clientX - r.left) / Math.max(textW, 1), 1);
-          };
+          const text = el.querySelector("text") as SVGTextElement;
+          const stop = watchPointer(
+            el,
+            (e, r, textLen) => {
+              if (!r) return;
+              const inY = e.clientY > r.top - 140 && e.clientY < r.bottom + 140;
+              if (!inY) return setFocus(0.5, 0);
+              const textW = (textLen ?? 0) * (r.width / 1000);
+              setFocus((e.clientX - r.left) / Math.max(textW, 1), 1);
+            },
+            // el ancho real del texto cambia al ensancharse las letras: se lee junto al resto de medidas
+            { onHide: () => setFocus(0.5, 0), measure: () => text.getComputedTextLength() }
+          );
           const onLeave = () => setFocus(0.5, 0);
-          window.addEventListener("pointermove", onMove, { passive: true });
           document.addEventListener("pointerleave", onLeave);
           return () => {
-            window.removeEventListener("pointermove", onMove);
+            stop();
             document.removeEventListener("pointerleave", onLeave);
+            gsap.ticker.remove(tick);
           };
         }
         const st = ScrollTrigger.create({

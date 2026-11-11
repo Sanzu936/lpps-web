@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { watchPointer } from "@/lib/pointer";
 import { heroState } from "./heroState";
 import LensPass from "./LensPass";
 
@@ -174,8 +175,8 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
   const pointer = useRef({ ndc: new THREE.Vector2(0.45, 0.1), active: 0, last: 0 });
   useEffect(() => {
     const el = gl.domElement.parentElement?.parentElement?.parentElement ?? window;
-    const onMove = (e: PointerEvent) => {
-      const r = gl.domElement.getBoundingClientRect();
+    const onMove = (e: PointerEvent, rect?: DOMRect | null) => {
+      const r = rect ?? gl.domElement.getBoundingClientRect();
       pointer.current.ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
       pointer.current.active = 1;
       pointer.current.last = performance.now();
@@ -191,11 +192,13 @@ function Field({ cols, rows, mobile, lite, onReady }: { cols: number; rows: numb
       invalidate();
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerdown", onMove, { passive: true });
+    // movimiento: gestor compartido (una pasada por fotograma, sin recálculos forzados)
+    const stopMove = watchPointer(gl.domElement, (e, r) => r && onMove(e, r));
+    const onDown = (e: PointerEvent) => onMove(e);
+    window.addEventListener("pointerdown", onDown, { passive: true });
     return () => {
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerdown", onMove);
+      stopMove();
+      window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("scroll", onScroll);
       void el;
     };
