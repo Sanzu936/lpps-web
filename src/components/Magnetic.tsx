@@ -2,6 +2,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { hasFinePointer, prefersReducedMotion } from "@/lib/env";
 import { loadMotion } from "@/lib/motion";
+import { watchPointer } from "@/lib/pointer";
 
 /**
  * Efecto magnético: cuando el cursor se acerca, el hijo se desplaza hacia él
@@ -37,8 +38,8 @@ export default function Magnetic({
     const iyTo = inner ? gsap.quickTo(inner, "y", { duration: 0.6, ease: "elastic.out(1, 0.45)" }) : null;
     let active = false;
 
-    const onMove = (e: PointerEvent) => {
-      const r = host.getBoundingClientRect();
+    const onMove = (e: PointerEvent, r: DOMRect | null) => {
+      if (!r) return;
       const cx = r.left + r.width / 2;
       const cy = r.top + r.height / 2;
       const dx = e.clientX - cx;
@@ -55,17 +56,19 @@ export default function Magnetic({
         ixTo?.(clamp(dx * 0.18, maxShift * 0.5));
         iyTo?.(clamp(dy * 0.18, maxShift * 0.4));
         target.style.setProperty("--mag", pull.toFixed(3));
-      } else if (active) {
-        active = false;
-        xTo(0);
-        yTo(0);
-        ixTo?.(0);
-        iyTo?.(0);
-        target.style.setProperty("--mag", "0");
-      }
+      } else release();
     };
-    window.addEventListener("pointermove", onMove, { passive: true });
-      off = () => window.removeEventListener("pointermove", onMove);
+    function release() {
+      if (!active) return;
+      active = false;
+      xTo(0);
+      yTo(0);
+      ixTo?.(0);
+      iyTo?.(0);
+      target!.style.setProperty("--mag", "0");
+    }
+    // un solo listener compartido, una pasada por fotograma y solo con el botón en pantalla
+    off = watchPointer(host, onMove, { onHide: release });
     });
     return () => {
       cancelled = true;

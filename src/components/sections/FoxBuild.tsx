@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useMotion } from "@/lib/motion";
+import { watchPointer } from "@/lib/pointer";
 import fox from "../fox-paths.json";
 
 /**
@@ -37,16 +38,16 @@ export default function FoxBuild() {
         const svg = root.querySelector("svg")!;
         const rx = gsap.quickTo(svg, "rotationY", { duration: 0.8, ease: "power3" });
         const ry = gsap.quickTo(svg, "rotationX", { duration: 0.8, ease: "power3" });
-        const onMove = (e: PointerEvent) => {
-          const r = root.getBoundingClientRect();
+        const onMove = (e: PointerEvent, r: DOMRect | null) => {
+          if (!r) return;
           const dx = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
           const dy = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
           rx(dx * 28);
           ry(-dy * 18);
         };
-        window.addEventListener("pointermove", onMove, { passive: true });
+        const stop = watchPointer(root, onMove);
         return () => {
-          window.removeEventListener("pointermove", onMove);
+          stop();
           lines.forEach((l) => l.remove());
         };
       });

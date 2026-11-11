@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { hasFinePointer } from "@/lib/env";
 import { whenIdle } from "@/lib/defer";
+import { watchPointer } from "@/lib/pointer";
 
 /**
  * Cristal líquido:
@@ -13,27 +14,16 @@ export default function GlassFx() {
 
   useEffect(() => {
     if (!hasFinePointer()) return;
-    let raf = 0;
-    let last: PointerEvent | null = null;
-    const update = () => {
-      raf = 0;
-      if (!last) return;
-      const t = (last.target as Element | null)?.closest?.(".glass, .btn--ghost") as HTMLElement | null;
-      if (!t) return;
-      const r = t.getBoundingClientRect();
-      t.style.setProperty("--gx", `${(((last.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
-      t.style.setProperty("--gy", `${(((last.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
-    };
-    const onMove = (e: PointerEvent) => {
-      last = e;
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      cancelAnimationFrame(raf);
-    };
+    // el panel bajo el ratón se mide junto con el resto de efectos, una vez por fotograma
+    return watchPointer(
+      (e) => (e.target as Element | null)?.closest?.(".glass, .btn--ghost") ?? null,
+      (e, r) => {
+        if (!r) return;
+        const t = (e.target as Element).closest(".glass, .btn--ghost") as HTMLElement;
+        t.style.setProperty("--gx", `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+        t.style.setProperty("--gy", `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
+      }
+    );
   }, []);
 
   // Mientras hay scroll, cristal sin refracción (ver .is-scrolling en globals.css)

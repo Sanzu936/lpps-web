@@ -72,13 +72,15 @@ export default function Cursor() {
     };
     // Al hacer scroll sin mover el ratón, el contenido cambia bajo el cursor:
     // se vuelve a mirar qué hay debajo para que la etiqueta no se quede pegada.
+    // Como mucho 10 veces por segundo (elementFromPoint obliga a recalcular el diseño en
+    // pleno scroll) y siempre una última vez al terminar.
     let scrollRaf = 0;
     const onScroll = () => {
       if (lastX < 0 || scrollRaf) return;
-      scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = window.setTimeout(() => {
         scrollRaf = 0;
         setTarget(document.elementFromPoint(lastX, lastY));
-      });
+      }, 100);
     };
     const leave = () => (el.dataset.hidden = "true");
     const down = () => gsap.to(ring, { scale: 0.82, duration: 0.15, ease: "power2.out" });
@@ -92,7 +94,7 @@ export default function Cursor() {
     return () => {
       window.removeEventListener("pointermove", move);
       window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(scrollRaf);
+      window.clearTimeout(scrollRaf);
       document.documentElement.removeEventListener("pointerleave", leave);
       window.removeEventListener("pointerdown", down);
       window.removeEventListener("pointerup", up);

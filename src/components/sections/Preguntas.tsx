@@ -99,14 +99,21 @@ export default function Preguntas() {
         // Sello que gira con la velocidad del scroll
         const seal = root.current!.querySelector(".seal__ring");
         const spin = gsap.to(seal, { rotation: 360, duration: 22, ease: "none", repeat: -1, paused: true });
+        // mismas animaciones reutilizadas en cada evento de scroll (antes, dos nuevas cada vez)
+        const boostTo = gsap.quickTo(spin, "timeScale", { duration: 0.2, ease: "power1.out" });
+        let settle: gsap.core.Tween | null = null;
+        const relax = gsap.delayedCall(0.2, () => {
+          settle = gsap.to(spin, { timeScale: 1, duration: 1.4 });
+        }).pause();
         const st = ScrollTrigger.create({
           trigger: root.current,
           start: "top bottom",
           end: "bottom top",
           onUpdate: (self) => {
             const v = gsap.utils.clamp(-8, 8, self.getVelocity() / 250);
-            gsap.to(spin, { timeScale: 1 + v, duration: 0.2, overwrite: true });
-            gsap.to(spin, { timeScale: 1, duration: 1.4, delay: 0.2 });
+            settle?.kill();
+            boostTo(1 + v);
+            relax.restart(true);
           },
           onToggle: (self) => (self.isActive ? spin.play() : spin.pause()),
         });
@@ -120,7 +127,11 @@ export default function Preguntas() {
           ease: "expo.out",
           scrollTrigger: { trigger: root.current!.querySelector(".guarantees"), start: "top 85%", once: true },
         });
-        return () => st.kill();
+        return () => {
+          st.kill();
+          relax.kill();
+          settle?.kill();
+        };
       });
     },
     root
