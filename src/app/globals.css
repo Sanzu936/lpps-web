@@ -215,6 +215,11 @@ p {
   .glass.glass--liquid {
     backdrop-filter: url(#liquid-glass) blur(10px) saturate(180%);
   }
+  /* La refracción SVG se calcula en el procesador: mientras haces scroll se usa el cristal con blur
+     y al parar vuelve la deformación líquida (GlassFx pone la clase). */
+  html.is-scrolling .glass.glass--liquid {
+    backdrop-filter: blur(10px) saturate(180%);
+  }
 }
 .glass::before {
   /* reflejo especular */
