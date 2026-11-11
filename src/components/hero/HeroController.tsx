@@ -34,7 +34,14 @@ export default function HeroController() {
           return;
         }
         const grid: [number, number] = wide ? [8, 12] : [12, 8];
+        // A partir de este instante del timeline todas las baldosas están giradas y tapan el lienzo 3D.
+        const COVERED_AT = 0.71;
         const tl = gsap.timeline({
+          onUpdate() {
+            const covered = this.time() >= COVERED_AT;
+            if (heroState.covered && !covered) heroState.wake?.();
+            heroState.covered = covered;
+          },
           defaults: { ease: "none" },
           scrollTrigger: {
             trigger: section,
@@ -89,6 +96,7 @@ export default function HeroController() {
           content.removeEventListener("focusin", onFocus);
           heroState.progress = 0;
           heroState.visible = true;
+          heroState.covered = false;
         };
       }
     );
