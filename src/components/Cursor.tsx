@@ -105,7 +105,9 @@ export default function Cursor() {
   return (
     <div className="cursor" ref={root} aria-hidden="true">
       <div className="cursor__ring">
-        <span className="cursor__label" ref={label} />
+        <div className="cursor__lens">
+          <span className="cursor__label" ref={label} />
+        </div>
       </div>
       <div className="cursor__dot" />
     </div>
