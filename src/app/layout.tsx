@@ -60,6 +60,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${anybody.variable} ${schibsted.variable}`}>
       <body>
+        {/* Si alguien entra por http:// en el dominio real, se pasa a https:// (lo ideal es activar además
+            "Always Use HTTPS" en Cloudflare, que lo hace antes de servir la página) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(location.protocol==="http:"&&/(^|\\.)lppstech\\.com$/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search+location.hash)`,
+          }}
+        />
         {/* modo diagnóstico (?sin=… / ?fps): solo actúa si la dirección lo pide */}
         <script dangerouslySetInnerHTML={{ __html: diagScript }} />
         <div className="ambient" aria-hidden="true" />

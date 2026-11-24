@@ -35,7 +35,7 @@ export default function Home() {
       <main id="contenido" tabIndex={-1}>
         <Hero />
         <div className="tape-slot">
-          <Tape items={["Tu web, hecha antes de pagar", "Ajustes incluidos", "Publicada en 48 horas", "Diseñada a mano"]} />
+          <Tape items={["Tu web, hecha antes de pagar", "Ajustes incluidos", "Publicada en 48 horas", "Diseñada para tu negocio"]} />
         </div>
         <Nosotros />
         <ComoFunciona />
