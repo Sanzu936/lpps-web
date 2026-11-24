@@ -7,16 +7,16 @@ const PARTNERS = [
   {
     id: "pablo" as const,
     name: "Pablo",
-    role: "Diseño y desarrollo",
-    text: "Diseña cada web desde una hoja en blanco y la programa a mano, sin plantillas ni constructores. Si algo en tu web se mueve con gracia, carga rápido o se ve igual de bien en el móvil, es cosa suya.",
-    tasks: ["Diseño visual y de interacción", "Programación y animación", "Velocidad, SEO técnico y accesibilidad"],
+    role: "Llamadas y webs",
+    text: "Te llama, entiende qué vendes y a quién, y monta tu web de principio a fin: diseño, textos y publicación. Si empiezas con él, es él quien te la enseña y hace los cambios contigo.",
+    tasks: ["Llamadas y seguimiento contigo", "Diseño y montaje de tu web", "Ajustes, publicación y dominio"],
   },
   {
     id: "lori" as const,
     name: "Lori",
-    role: "Proyecto, textos y publicación",
-    text: "Es quien suele llamarte. Entiende qué vendes y a quién, escribe contigo los textos y lleva los ajustes hasta que la web queda como quieres. Después la publica en tu hosting y en tu dominio.",
-    tasks: ["Llamadas y seguimiento contigo", "Textos y estructura de la web", "Ajustes, publicación y dominio"],
+    role: "Llamadas y webs",
+    text: "Hace lo mismo que Pablo: te llama, escucha qué necesita tu negocio y lleva tu web hasta dejarla publicada en tu hosting y tu dominio. Trates con quien trates, lo tienes de principio a fin.",
+    tasks: ["Llamadas y seguimiento contigo", "Diseño y montaje de tu web", "Ajustes, publicación y dominio"],
   },
 ];
 
