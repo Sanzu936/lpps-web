@@ -1,4 +1,4 @@
-import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF, withBase } from "@/config/site";
+import { EMAIL, EMAIL_HREF, LEGAL_COMPLETO, PHONE_DISPLAY, PHONE_HREF, withBase } from "@/config/site";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -14,12 +14,16 @@ export default function Footer() {
             <li>
               <a href={EMAIL_HREF}>{EMAIL}</a>
             </li>
-            <li>
-              <a href={withBase("/aviso-legal/")}>Aviso legal</a>
-            </li>
-            <li>
-              <a href={withBase("/privacidad/")}>Política de privacidad</a>
-            </li>
+            {LEGAL_COMPLETO ? (
+              <>
+                <li>
+                  <a href={withBase("/aviso-legal/")}>Aviso legal</a>
+                </li>
+                <li>
+                  <a href={withBase("/privacidad/")}>Política de privacidad</a>
+                </li>
+              </>
+            ) : null}
             <li>
               <a href={withBase("/cookies/")}>Política de cookies</a>
             </li>

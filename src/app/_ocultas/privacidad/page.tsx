@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage, Pendiente } from "@/components/Legal";
-import "../legal.css";
+import "../../legal.css";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",

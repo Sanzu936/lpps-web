@@ -18,7 +18,7 @@ npm start          # (opcional) sirve out/ en http://localhost:3000 para revisar
 
 ## Desplegar
 
-Sube **el contenido de la carpeta `out/`** a la raíz pública de tu hosting (`public_html`, `www`, etc.) por FTP o desde el gestor de archivos. No necesita Node ni base de datos. Cada página va en su carpeta con `index.html` (`/aviso-legal/`, `/privacidad/`, `/cookies/`), así que funciona en cualquier servidor (Apache, Nginx, Netlify, Vercel, Cloudflare Pages…).
+Sube **el contenido de la carpeta `out/`** a la raíz pública de tu hosting (`public_html`, `www`, etc.) por FTP o desde el gestor de archivos. No necesita Node ni base de datos. Cada página va en su carpeta con `index.html` (por ahora `/cookies/`), así que funciona en cualquier servidor (Apache, Nginx, Netlify, Vercel, Cloudflare Pages…).
 
 ### Publicar en una subcarpeta (por ejemplo, como demo)
 
@@ -40,14 +40,16 @@ export const BOOKING_HREF = "#contacto";
 
 Cámbiala por la URL de vuestra agenda (Calendly, Cal.com, Google Calendar…) y vuelve a ejecutar `npm run build`. Si es una URL externa, se abre en una pestaña nueva automáticamente. En ese mismo archivo están el teléfono y el correo.
 
-## Datos legales pendientes
+## Aviso legal y política de privacidad (ocultos)
 
-Solo faltan los datos del titular. Están resaltados como **[Pendiente: …]** en:
+Están ocultos hasta tener los datos del titular: no se publican ni hay enlaces a ellos. El texto se conserva en `src/app/_ocultas/` (las carpetas que empiezan por `_` no generan páginas).
 
-- `src/components/Legal.tsx` (componente `Titular`, usado en el aviso legal): nombre o razón social, NIF, domicilio y, solo si es una sociedad, los datos de inscripción en el registro mercantil (si sois autónomos, borrad esa línea).
-- `src/app/privacidad/page.tsx` (tabla «Responsable del tratamiento»): nombre o razón social, NIF y domicilio.
+Faltan, marcados como **[Pendiente: …]**:
 
-Sustituye cada `<Pendiente>…</Pendiente>` por el dato real (texto normal) y genera de nuevo la web.
+- `src/app/_ocultas/aviso-legal/page.tsx` (usa el componente `Titular` de `src/components/Legal.tsx`): nombre o razón social, NIF, domicilio y, solo si es una sociedad, los datos de inscripción en el registro mercantil.
+- `src/app/_ocultas/privacidad/page.tsx` (tabla «Responsable del tratamiento»): nombre o razón social, NIF y domicilio.
+
+Para publicarlos, sigue los pasos de `src/app/_ocultas/README.md`.
 
 ## Añadir proyectos de muestra a «Trabajos»
 
