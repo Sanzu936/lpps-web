@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { LegalPage, Titular } from "@/components/Legal";
 import { withBase } from "@/config/site";
-import "../legal.css";
+import "../../legal.css";
 
 export const metadata: Metadata = {
   title: "Aviso legal",

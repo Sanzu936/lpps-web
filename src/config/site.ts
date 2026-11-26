@@ -23,3 +23,9 @@ export const SITE_NAME = "LPPS";
 export const SITE_TITLE = "LPPS · Diseñamos y publicamos webs que no parecen de plantilla";
 export const SITE_DESCRIPTION =
   "Somos Pablo y Lori. Diseñamos webs a medida para negocios online, te enseñamos la tuya terminada antes de que pagues nada y la publicamos en tu hosting en 48 horas.";
+
+/**
+ * Aviso legal y política de privacidad: ocultos hasta tener los datos del titular
+ * (ver src/app/_ocultas/README.md). Con false no hay enlaces a ellos ni entran en el sitemap.
+ */
+export const LEGAL_COMPLETO = false;
